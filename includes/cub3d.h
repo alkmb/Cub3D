@@ -6,12 +6,28 @@
 /*   By: kmb <kmb@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 03:06:23 by kmb               #+#    #+#             */
-/*   Updated: 2024/04/25 04:50:11 by kmb              ###   ########.fr       */
+/*   Updated: 2024/04/26 06:08:27 by kmb              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
+
+//-----------------------DEFINES------------------------------------------------
+# define WINDOW_WIDTH 1200
+# define WINDOW_HEIGHT 900
+# define SCALE_X WINDOW_WIDTH / MAP_WIDTH
+# define SCALE_Y WINDOW_HEIGHT / MAP_HEIGHT
+# define KEY_W 119
+# define KEY_A 97
+# define KEY_S 115
+# define KEY_D 100
+# define KEY_LEFT 65361
+# define KEY_RIGHT 65363
+# define KEY_ESC 65307
+# define MAP_WIDTH 10
+# define MAP_HEIGHT 10
+# define M_PI 3.14159265358979323846
 
 //-----------------------INCLUDES----------------------------------------------
 # include <math.h>
@@ -38,8 +54,10 @@ typedef struct s_player
 {
     double x;
     double y;
-    double direction;
-    double speed;
+    double delta_x;
+    double delta_y;
+    double angle;
+    double rotation_angle;
 }   t_player;
 
 typedef struct s_ray
@@ -74,11 +92,17 @@ typedef struct s_game
     t_mlx mlx;
     t_player player;
     t_map map;
-    t_ray rays;
+    t_ray rays[WINDOW_WIDTH];
 }   t_game;
+
+extern int map[MAP_HEIGHT][MAP_WIDTH];
 
 //-----------------------PROTOTYPES--------------------------------------------
 //-----------------------INIT--------------------------------------------------
 void    init_game(t_game *game);
+//-----------------------DRAW--------------------------------------------------
+void    draw_map(t_game *game);
+void    draw_player(t_game *game, int width, int height, int color);
+void    draw_player_angle(t_game *game, int length);
 
 #endif
