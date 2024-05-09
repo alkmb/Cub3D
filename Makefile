@@ -4,17 +4,16 @@ CC		= gcc
 CFLAGS	= -Werror -Wextra -Wall -fsanitize=address
 RM		= rm -rf
 
-MLX_PATH	= minilibx
+MLX_PATH	= lib/minilibx
 MLX_NAME	= libmlx.a
 MLX			= $(MLX_PATH)$(MLX_NAME)
-LIBFT_PATH	= libft/
+LIBFT_PATH	= lib/libft/
 LIBFT_NAME	= libft.a
 LIBFT		= $(LIBFT_PATH)$(LIBFT_NAME)
 INC			=	-I ./includes/\
 
 SRC_PATH	=	src/
-SRC			=	$(wildcard $(SRC_PATH)*.c)
-
+SRC			=	$(wildcard $(SRC_PATH)*.c $(SRC_PATH)*/*.c)
 OBJ_PATH	= obj/
 OBJ			= $(SRC:$(SRC_PATH)%.c=$(OBJ_PATH)%.o)
 
