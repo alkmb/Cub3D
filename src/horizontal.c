@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   horizontal.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmb <kmb@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nobmk <nobmk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 01:39:32 by kmb               #+#    #+#             */
-/*   Updated: 2024/05/06 01:39:53 by kmb              ###   ########.fr       */
+/*   Updated: 2024/05/23 00:09:31 by nobmk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void    cast_horizontal(t_game *game)
             game->rays->mp = game->rays->my * game->map.width + game->rays->mx;
         }
         if (game->rays->mp > 0 && game->rays->mp < game->map.width * \
-        game->map.height && map[game->rays->mp] == 1)
+        game->map.height && game->map.map[game->rays->mp] == 1)
         {
             game->rays->horizontal_x = game->rays->ray_x;
             game->rays->horizontal_y = game->rays->ray_y;

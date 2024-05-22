@@ -8,8 +8,6 @@
 | || (_) |_____| (_| | (_) | 
  \__\___/       \__,_|\___/  
 
-TU FILE DE PARSING.C ESTA EN LA CARPETA DE MAPS!!!!!!!!!!
-
 DONE
 
 -----------------------------------------------------------------------------
@@ -25,10 +23,15 @@ movimiento jugador y rotacion
 
 creacion de estructuras y algoritmo para el angulo
 
+parsing completo del mapa hay que leer el file y pasarlo a array de mapa
+despues parsear los colores y tal.
 
+direccion del spawn del jugador
+
+crear mapas para testeo
 -----------------------------------------------------------------------------
------------------------------------------------------------------------------
-FALTA
+----------------------------------------------------------------------------
+MISSING
 
 -----------------------------------------------------------------------------
 -----------------------------------------------------------------------------
@@ -40,19 +43,21 @@ controlar desde la ventana 3d
 
 texturizar paredes
 
-aplicar todo lo que tiene que ver con norte sur oeste...
+aplicar colores al techo y al suelo 
 
-parsing completo del mapa hay que leer el file y pasarlo a array de mapa
-despues parsear los colores y tal.
+aplicar todo lo que tiene que ver con norte sur oeste...
 
 testear leaks y errores
 
 poner todo lo de la ventana 1 a modo de minimapa
 
-direccion del spawn del jugador
+tabs en el mapa y que se puede leer un mapa no quadrado
+
+llamar mas veces al raycaster para que no ssse rayen las paredes
+
+norminette y codigo legible y limpio
 
 poder mirar mientras se mueve
 
-crear mapas para testeo
 ------------------------------------------------------------------------------
 ------------------------------------------------------------------------------

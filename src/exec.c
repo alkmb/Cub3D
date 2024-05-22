@@ -3,21 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmb <kmb@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nobmk <nobmk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 00:38:00 by kmb               #+#    #+#             */
-/*   Updated: 2024/05/06 01:18:39 by kmb              ###   ########.fr       */
+/*   Updated: 2024/05/23 00:18:50 by nobmk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
-
 void init_game(t_game *game)
 {
     int x = 0, y = 0;
-    game->map.mapX = 25,  game->map.mapY = 14,  game->map.mapS = 64;
 
-
+    game->map.mapY -= 1;
     game->mlx.mlx_ptr = mlx_init();
     game->map.width = game->map.mapX * game->map.mapS;
     game->map.height = game->map.mapY * game->map.mapS;
@@ -27,12 +25,12 @@ void init_game(t_game *game)
 
     game->map.width = 0;
     game->map.height = 0;
-    game->map.floor_color.b = 128;
-    game->map.floor_color.g = 128;
-    game->map.floor_color.r = 128;
-    game->map.ceiling_color.b = 0;
-    game->map.ceiling_color.g = 0;
-    game->map.ceiling_color.r = 0;
+    //game->map.floor_color.b = 128;
+    //game->map.floor_color.g = 128;
+    //game->map.floor_color.r = 128;
+    //game->map.ceiling_color.b = 0;
+    //game->map.ceiling_color.g = 0;
+    //game->map.ceiling_color.r = 0;
 
     while ( y < game->map.mapY)
     {

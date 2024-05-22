@@ -1,16 +1,17 @@
 NAME	= cub3d
 
 CC		= gcc
-CFLAGS	= -Werror -Wextra -Wall -fsanitize=address
+CFLAGS	= -fsanitize=address#-Werror -Wextra -Wall
 RM		= rm -rf
 
-MLX_PATH	= lib/minilibx
+MLX_PATH	= lib/minilibx/
+#MLX_PATH	= lib/minilibx_mac/
 MLX_NAME	= libmlx.a
 MLX			= $(MLX_PATH)$(MLX_NAME)
 LIBFT_PATH	= lib/libft/
 LIBFT_NAME	= libft.a
-LIBFT		= $(LIBFT_PATH)$(LIBFT_NAME)
-INC			=	-I ./includes/\
+LIBFT		= $(LIBFT_PATH)
+INC			=	-I ./includes/ -I ./lib/minilibx/ -I ./lib/libft/
 
 SRC_PATH	=	src/
 SRC			=	$(wildcard $(SRC_PATH)*.c $(SRC_PATH)*/*.c)
@@ -20,21 +21,23 @@ OBJ			= $(SRC:$(SRC_PATH)%.c=$(OBJ_PATH)%.o)
 all: $(MLX) $(LIBFT) $(NAME)
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
-	@$(CC) $(CFLAGS) -c $< -o $@ $(INC) > /dev/null
+	@$(CC) $(CFLAGS) -c $< -o $@ $(INC)
 
 $(OBJ_PATH):
-	@mkdir -p $(OBJ_PATH) > /dev/null
+	@mkdir -p $(OBJ_PATH)
 
 $(MLX):
-	@make -C $(MLX_PATH) > /dev/null
+	@make -C $(MLX_PATH)
 
 $(LIBFT):
-	@make -C $(LIBFT_PATH) > /dev/null
+	@make -C $(LIBFT_PATH)
 
 $(NAME): $(OBJ_PATH) $(OBJ)
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -L $(MLX_PATH) -lmlx -L $(LIBFT_PATH) \
-	-lft -lX11 -lXpm -lXext -lm > /dev/null
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -L./lib/libft -lft -L./$(MLX_PATH) -lmlx -lX11 -lXpm -lXext -lm
 	@echo -e "\033[0;32m$(NAME) created 📚\033[0m"
+
+#$(NAME): $(OBJ_PATH) $(OBJ)
+#	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -L $(MLX_PATH) -lmlx1-framework Cocoa -framework OpenGL -framework IOKit -lm > /dev/null
 
 clean:
 	@$(RM) $(OBJ_PATH)

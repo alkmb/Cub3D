@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vertical.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kmb <kmb@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: nobmk <nobmk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 01:38:44 by kmb               #+#    #+#             */
-/*   Updated: 2024/05/06 01:39:20 by kmb              ###   ########.fr       */
+/*   Updated: 2024/05/23 00:10:05 by nobmk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void    cast_vertical(t_game *game)
         && game->rays->my >= 0 && game->rays->my < game->map.height) 
             game->rays->mp = game->rays->my * game->map.width + game->rays->mx;
         if (game->rays->mp > 0 && game->rays->mp < game->map.width * game->map.height 
-        && map[game->rays->mp] == 1)
+        && game->map.map[game->rays->mp] == 1)
         {
             game->rays->vertical_x = game->rays->ray_x;
             game->rays->vertical_y = game->rays->ray_y;
