@@ -5,13 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: nobmk <nobmk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/06 01:39:32 by kmb               #+#    #+#             */
-/*   Updated: 2024/05/23 00:09:31 by nobmk            ###   ########.fr       */
+/*   Created: 824/05/06 01:39:32 by kmb               #+#    #+#             */
+/*   Updated: 824/05/23 01:02:32 by nobmk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+// Es lo mismo que el vertical pero las diferencias son que el offset en y es 64 \
+y el offset en x es el offset en y multiplicado por la tangente del angulo \
+del jugador
 void    cast_horizontal(t_game *game)
 {
     while (game->rays->deapht_of_field < 8)

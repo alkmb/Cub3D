@@ -6,13 +6,14 @@
 /*   By: nobmk <nobmk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 03:07:46 by kmb               #+#    #+#             */
-/*   Updated: 2024/05/23 00:10:32 by nobmk            ###   ########.fr       */
+/*   Updated: 2024/05/23 02:27:06 by nobmk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-// En este caso, la función do_map() se encarga de asignar los valores de la matriz map[] a la estructura map del juego.
+// En este caso, la función do_map() se encarga de asignar los valores de la \
+matriz map[] a la estructura map del juego.
 void	do_map(t_game *game)
 {
 	int i;
@@ -51,7 +52,8 @@ void	do_map(t_game *game)
 			game->map.map[i] = 1;
 		else if (game->map.temp_map[j] == '0')
 			game->map.map[i] = 0;
-		else if (game->map.temp_map[j] == 'N' || game->map.temp_map[j] == 'S' || game->map.temp_map[j] == 'E' || game->map.temp_map[j] == 'W')
+		else if (game->map.temp_map[j] == 'N' || game->map.temp_map[j] == 'S' 
+		|| game->map.temp_map[j] == 'E' || game->map.temp_map[j] == 'W')
 			game->map.map[i] = 3;
 		i++;
 		j++;

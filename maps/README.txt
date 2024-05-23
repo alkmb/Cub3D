@@ -29,35 +29,25 @@ despues parsear los colores y tal.
 direccion del spawn del jugador
 
 crear mapas para testeo
+
+colision de paredes
+
 -----------------------------------------------------------------------------
 ----------------------------------------------------------------------------
 MISSING
 
 -----------------------------------------------------------------------------
 -----------------------------------------------------------------------------
-colision de paredes
-
-fluidez con las teclas 
-
-controlar desde la ventana 3d
 
 texturizar paredes
 
 aplicar colores al techo y al suelo 
 
-aplicar todo lo que tiene que ver con norte sur oeste...
+tabs en el mapa y que se puede leer un mapa no quadrado
 
 testear leaks y errores
 
-poner todo lo de la ventana 1 a modo de minimapa
-
-tabs en el mapa y que se puede leer un mapa no quadrado
-
-llamar mas veces al raycaster para que no ssse rayen las paredes
-
 norminette y codigo legible y limpio
-
-poder mirar mientras se mueve
 
 ------------------------------------------------------------------------------
 ------------------------------------------------------------------------------

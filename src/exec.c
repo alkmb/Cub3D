@@ -6,11 +6,12 @@
 /*   By: nobmk <nobmk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 00:38:00 by kmb               #+#    #+#             */
-/*   Updated: 2024/05/23 00:18:50 by nobmk            ###   ########.fr       */
+/*   Updated: 2024/05/23 02:14:44 by nobmk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
 void init_game(t_game *game)
 {
     int x = 0, y = 0;
@@ -20,17 +21,12 @@ void init_game(t_game *game)
     game->map.width = game->map.mapX * game->map.mapS;
     game->map.height = game->map.mapY * game->map.mapS;
     game->map.cellSize =  game->map.mapS - 1;
-    game->mlx.win_ptr2 = mlx_new_window(game->mlx.mlx_ptr, game->map.width, game->map.height, "cub3d1");
-    game->mlx.win_ptr = mlx_new_window(game->mlx.mlx_ptr, game->map.width, game->map.height, "cub3d");
+
+    game->mlx.win_ptr = mlx_new_window(game->mlx.mlx_ptr, \
+    game->map.width, game->map.height * 2, "Game");
 
     game->map.width = 0;
     game->map.height = 0;
-    //game->map.floor_color.b = 128;
-    //game->map.floor_color.g = 128;
-    //game->map.floor_color.r = 128;
-    //game->map.ceiling_color.b = 0;
-    //game->map.ceiling_color.g = 0;
-    //game->map.ceiling_color.r = 0;
 
     while ( y < game->map.mapY)
     {

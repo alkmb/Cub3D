@@ -6,7 +6,7 @@
 /*   By: nobmk <nobmk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 09:18:04 by gprada-t          #+#    #+#             */
-/*   Updated: 2024/05/23 00:22:08 by nobmk            ###   ########.fr       */
+/*   Updated: 2024/05/23 01:29:34 by nobmk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,16 @@ int	parse_map(t_game *game, char *line)
 			return (FAILURE);
 		}
 		//revisa este if porque no se si es como lo  necesitas o no
-		if (line[i] == 'N' || line[i] == 'S' || line[i] == 'E' || line[i] == 'W')
+		if (line[i] == 'N' || line[i] == 'S' 
+			|| line[i] == 'E' || line[i] == 'W')
 		{
 			game->player.x = i;
 			game->player.y = game->map.mapY;
 			game->player.angle = line[i];
 			player++;
 		}
-		else if (line[i] == '1' || line[i] == '0' || line[i] == ' ' || line[i] == '\t')
+		else if (line[i] == '1' || line[i] == '0' 
+			|| line[i] == ' ' || line[i] == '\t')
 		{
 			if (line[i] == '\t')
 				tab_count += 3;
@@ -163,12 +165,14 @@ void	parse_texture_and_colors(t_game *game, char *line)
 	else if (strncmp(line, "F", 1) == 0)
 	{
 		parse_color(game, line);
-		printf("floor color: %d %d %d\n", game->map.floor_color.r, game->map.floor_color.g, game->map.floor_color.b);
+		printf("floor color: %d %d %d\n", game->map.floor_color.r, \
+		game->map.floor_color.g, game->map.floor_color.b);
 	}
 	else if (strncmp(line, "C", 1) == 0)
 	{
 		parse_color(game, line);
-		printf("ceiling color: %d %d %d\n", game->map.ceiling_color.r, game->map.ceiling_color.g, game->map.ceiling_color.b);
+		printf("ceiling color: %d %d %d\n", game->map.ceiling_color.r, \
+		game->map.ceiling_color.g, game->map.ceiling_color.b);
 	}
 }
 
@@ -183,7 +187,8 @@ int	textures_and_colors_get(t_game *game)
 	return (FALSE);
 }
 
-// Inicializo los valores de map y chekeo archivo y relleno datos en las funciones parse_map
+// Inicializo los valores de map y chekeo archivo y relleno datos en \
+las funciones parse_map
 int	parse_file(t_game *game, char *argv)
 {
 	int		fd;
