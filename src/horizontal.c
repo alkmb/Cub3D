@@ -12,9 +12,6 @@
 
 #include "../includes/cub3d.h"
 
-// Es lo mismo que el vertical pero las diferencias son que el offset en y es 64 \
-y el offset en x es el offset en y multiplicado por la tangente del angulo \
-del jugador
 void    cast_horizontal(t_game *game)
 {
     while (game->rays->deapht_of_field < 8)

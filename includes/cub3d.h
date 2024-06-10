@@ -1,24 +1,28 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gprada-t <gprada-t@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: nobmk <nobmk@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 03:06:23 by kmb               #+#    #+#             */
-/*   Updated: 2024/05/21 11:04:14 by gprada-t         ###   ########.fr       */
+/*   Updated: 2024/06/08 00:05:29 by nobmk            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 //-----------------------DEFINES------------------------------------------------
-#define SUCCESS 0
-#define FAILURE 1
-#define TRUE 1
+# define SUCCESS 0
+# define FAILURE 1
+# define TRUE 1
 #define FALSE 0
+# define FLOOR_COLOR 0xFF0000
+# define CEILING_COLOR 0x00FF00
 //-----------------------KEYS--------------------------------------------------
 # define KEY_W 119
+# define EVENT_CLOSE_BTN 17
 # define KEY_A 97
 # define KEY_S 115
 # define KEY_D 100
@@ -45,11 +49,6 @@
 # include "../lib/libft/includes/libft.h"
 
 //-----------------------STRUCTS-----------------------------------------------
-
-typedef struct s_mlx
-{
-    void    *mlx_ptr, *win_ptr, *win_ptr2;
-}   t_mlx;
 
 typedef struct s_player
 {
@@ -95,11 +94,24 @@ typedef struct s_map
 	int		color;
 }	t_map;
 
+typedef struct	s_data
+{
+	void    *mlx_ptr, *win_ptr, *win_ptr2;
+	void	*img;
+	void	*texture;
+	char	*texture_addr;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}				t_data;
+
 typedef struct s_game
 {
-    t_mlx mlx;
     t_player player;
     t_map map;
+	t_data data;
+	t_data texture;
     t_ray rays[60];
 }   t_game;
 
@@ -107,35 +119,36 @@ extern int map[];
 
 
 //-----------------------PARSING-----------------------------------------------
-int     parse_file(t_game *game, char *file);
-void	parse_color(t_game *game, char *line);
-void	parse_texture_and_colors(t_game *game, char *line);
-int	parse_map(t_game *game, char *line);
+int    		parse_file(t_game *game, char *file);
+void		parse_color(t_game *game, char *line);
+void		parse_texture_and_colors(t_game *game, char *line);
+int			parse_map(t_game *game, char *line);
 //-----------------------PROTOTYPES--------------------------------------------
 //-----------------------INIT--------------------------------------------------
-void    init_game(t_game *game);
+void    	init_game(t_game *game);
 //-----------------------LOOP--------------------------------------------------
-int     loop(t_game *game);
+int     	loop(t_game *game);
 //--------------------WINDOW--------------------------------------------------
-void    draw_map(t_game *game);
+void    	draw_map(t_game *game);
 //-----------------------PLAYER------------------------------------------------
-int     key_press(int keycode, t_game *game);
-void    draw_player(t_game *game, int width, int height, int color);
-void    draw_player_angle(t_game *game, int rayIndex, int lenght);
+int     	key_press(int keycode, t_game *game);
+void    	draw_player(t_game *game, int width, int height, int color);
+void    	draw_player_angle(t_game *game, int rayIndex, int lenght);
 //-----------------------CASTER------------------------------------------------
-void    cast_rays(t_game *game);
-void    draw_3D(t_game *game);
+void    	cast_rays(t_game *game);
+void    	draw_3D(t_game *game);
 //-----------------------HORIZONTAL--------------------------------------------
-void    cast_horizontal(t_game *game);
-void    horizontal_direction(t_game *game);
-void    reset_horizontal(t_game *game);
+void    	cast_horizontal(t_game *game);
+void   		horizontal_direction(t_game *game);
+void    	reset_horizontal(t_game *game);
 //-----------------------VERTICAL----------------------------------------------
-void    cast_vertical(t_game *game);
-void    vertical_direction(t_game *game);
-void    reset_vertical(t_game *game);
+void    	cast_vertical(t_game *game);
+void    	vertical_direction(t_game *game);
+void	    reset_vertical(t_game *game);
 //-----------------------UTILS-------------------------------------------------
 float       distance(float x1, float y1, float x2, float y2);
-void        chose_length(t_game *game);
+void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void    	chose_lenght(t_game *game);
 void        reset_angle(t_game *game);
 void        get_angle(t_game *game);
 #endif
