@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 06:27:32 by akambou           #+#    #+#             */
-/*   Updated: 2024/06/12 06:29:32 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/12 15:22:45 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,7 @@ int key_press(int keycode, t_game *game)
     player_angle(keycode, game);
     if (keycode == KEY_ESC)
         exit(0);
-    if (!is_wall(game, game->player.nextX, game->player.nextY) 
-        && game->rays->line_offset >= 3.50000)
+    if (!is_wall(game, game->player.nextX, game->player.nextY))
     {
         game->player.x = game->player.nextX;
         game->player.y = game->player.nextY;

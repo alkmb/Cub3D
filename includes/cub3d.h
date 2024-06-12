@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 03:06:23 by kmb               #+#    #+#             */
-/*   Updated: 2024/06/12 15:12:46 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/12 16:30:13 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,8 @@ typedef struct	s_data
 	void	*e_texture;
 	int    	texture_width;
 	int    	texture_height;
+	int	 	texture_x;
+	int	 	texture_y;
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;

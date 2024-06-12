@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 00:38:00 by kmb               #+#    #+#             */
-/*   Updated: 2024/06/12 15:15:23 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/12 15:51:00 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,16 @@ void init_textures(t_game *game)
     "textures/brick.xpm", &game->data.texture_width, &game->data.texture_height);
     game->data.s_addr = mlx_get_data_addr(game->data.s_texture, \
     &game->data.bits_per_pixel, &game->data.line_length, &game->data.endian);
+
+    game->data.w_texture = mlx_xpm_file_to_image(game->data.mlx_ptr, \
+    "textures/hitler.xpm", &game->data.texture_width, &game->data.texture_height);
+    game->data.w_addr = mlx_get_data_addr(game->data.w_texture, \
+    &game->data.bits_per_pixel, &game->data.line_length, &game->data.endian);
+
+    game->data.e_texture = mlx_xpm_file_to_image(game->data.mlx_ptr, \  
+    "textures/eagle.xpm", &game->data.texture_width, &game->data.texture_height);
+    game->data.e_addr = mlx_get_data_addr(game->data.e_texture, \
+    &game->data.bits_per_pixel, &game->data.line_length, &game->data.endian);
  }
 
 void    init_window(t_game* game)
@@ -45,7 +55,7 @@ void    init_window(t_game* game)
     game->map.width / 2, game->map.height, "Game");
     init_textures(game);
     game->data.img = mlx_new_image(game->data.mlx_ptr, \
-    game->map.width / 2, game->map.height);
+    game->map.width, game->map.height);
     game->data.addr = mlx_get_data_addr(game->data.img, \
     &game->data.bits_per_pixel, &game->data.line_length, &game->data.endian);
 }
