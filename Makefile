@@ -33,7 +33,7 @@ $(LIBFT):
 	@make -C $(LIBFT_PATH)
 
 $(NAME): $(OBJ_PATH) $(OBJ)
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -L./lib/libft -lft -L./$(MLX_PATH) -lmlx -L/usr/include/../lib -lXext -lX11 -lm
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -L./lib/libft -lft -L./$(MLX_PATH) -lmlx -L/usr/include/../lib -lXext -lX11 -lm -lbsd
 	@echo -e "\033[0;32m$(NAME) created 📚\033[0m"
 
 #$(NAME): $(OBJ_PATH) $(OBJ)

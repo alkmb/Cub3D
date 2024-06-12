@@ -6,11 +6,11 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 00:36:56 by kmb               #+#    #+#             */
-/*   Updated: 2024/06/07 16:41:46 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/12 06:31:10 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include <cub3d.h>
 
 float distance(float x1, float y1, float x2, float y2)
 {
@@ -22,12 +22,12 @@ void    chose_lenght(t_game *game)
     if (game->rays->h_length < game->rays->v_length)
     {
         game->rays->total_length = game->rays->h_length;
-        draw_player_angle(game, 0, game->rays->h_length);
+        // draw_ray(game, 0, game->rays->h_length);
     }
     else
     {
         game->rays->total_length = game->rays->v_length;
-        draw_player_angle(game, 0, game->rays->v_length);
+        // draw_ray(game, 0, game->rays->v_length);
     }
 }
 
@@ -61,7 +61,7 @@ void cast_rays(t_game *game)
         vertical_direction(game);
         cast_vertical(game);
         chose_lenght(game);
-        draw_3D(game);
+        draw_window(game);
         game->rays->angle += DR;
         game->rays->ray++;
     }

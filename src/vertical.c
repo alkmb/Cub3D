@@ -6,11 +6,11 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 01:38:44 by kmb               #+#    #+#             */
-/*   Updated: 2024/06/07 16:41:24 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/12 06:30:59 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include <cub3d.h>
 
 void    cast_vertical(t_game *game)
 {
