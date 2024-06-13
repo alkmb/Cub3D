@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/06 01:38:44 by kmb               #+#    #+#             */
-/*   Updated: 2024/06/12 06:30:59 by akambou          ###   ########.fr       */
+/*   Created: 2024/05/06 01:315:44 by kmb               #+#    #+#             */
+/*   Updated: 2024/06/13 01:43:35 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void    cast_vertical(t_game *game)
 {
-    while (game->rays->deapht_of_field < 8)
+    while (game->rays->deapht_of_field < 15)
     {
         game->rays->mx = (int)game->rays->ray_x >> 6;
         game->rays->my = (int)game->rays->ray_y >> 6;
@@ -29,7 +29,7 @@ void    cast_vertical(t_game *game)
             game->rays->vertical_y = game->rays->ray_y;
             game->rays->v_length = distance(game->player.x, game->player.y, \
             game->rays->vertical_x, game->rays->vertical_y);
-            game->rays->deapht_of_field = 8;
+            game->rays->deapht_of_field = 15;
         }
         else
         {
@@ -65,13 +65,13 @@ void    vertical_direction(t_game *game)
     {
         game->rays->ray_x = game->player.x;
         game->rays->ray_y = game->player.y;
-        game->rays->deapht_of_field = 8;
+        game->rays->deapht_of_field = 15;
     }
 }
 
 void    reset_vertical(t_game *game)
 {
-        game->rays->v_length = 100000000;
+        game->rays->v_length = 200000000 * 2;
         game->rays->vertical_x = game->player.x;
         game->rays->vertical_y = game->player.y;
         game->rays->deapht_of_field = 0;

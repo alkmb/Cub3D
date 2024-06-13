@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   horizontal.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nobmk <nobmk@student.42.fr>                +#+  +:+       +#+        */
+/*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 824/05/06 01:39:32 by kmb               #+#    #+#             */
-/*   Updated: 824/05/23 01:02:32 by nobmk            ###   ########.fr       */
+/*   Created: 1524/05/06 01:39:32 by kmb               #+#    #+#             */
+/*   Updated: 2024/06/13 01:44:44 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void    cast_horizontal(t_game *game)
 {
-    while (game->rays->deapht_of_field < 8)
+    while (game->rays->deapht_of_field < 15)
     {
         game->rays->mx = (int)game->rays->ray_x >> 6;
         game->rays->my = (int)game->rays->ray_y >> 6;
@@ -29,7 +29,7 @@ void    cast_horizontal(t_game *game)
             game->rays->horizontal_y = game->rays->ray_y;
             game->rays->h_length = distance(game->player.x, \
             game->player.y, game->rays->horizontal_x, game->rays->horizontal_y);
-            game->rays->deapht_of_field = 8;
+            game->rays->deapht_of_field = 15;
         }
         else
         {
@@ -65,14 +65,14 @@ void    horizontal_direction(t_game *game)
     {
         game->rays->ray_x = game->player.x;
         game->rays->ray_y = game->player.y;
-        game->rays->deapht_of_field = 8;
+        game->rays->deapht_of_field = 15;
     }
 }
 
 
 void    reset_horizontal(t_game *game)
 {
-        game->rays->h_length = 100000000;
+        game->rays->h_length = 200000000 * 2;
         game->rays->horizontal_x = game->player.x;
         game->rays->horizontal_y = game->player.y;
         game->rays->deapht_of_field = 0;

@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 00:38:00 by kmb               #+#    #+#             */
-/*   Updated: 2024/06/12 15:51:00 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/13 02:15:37 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,23 +24,28 @@ void init_map(t_game *game)
 
 void init_textures(t_game *game)
  {
+    printf ("north:%s1\n" , game->map.north_texture);
+    printf ("%s\n" , game->map.south_texture);
+    printf ("%s\n" , game->map.west_texture);
+    printf ("%s\n" , game->map.east_texture);
+
     game->data.n_texture = mlx_xpm_file_to_image(game->data.mlx_ptr, \
-    "textures/wood.xpm", &game->data.texture_width, &game->data.texture_height);
+    game->map.north_texture, &game->data.texture_width, &game->data.texture_height);
     game->data.n_addr = mlx_get_data_addr(game->data.n_texture, \
     &game->data.bits_per_pixel, &game->data.line_length, &game->data.endian);
 
     game->data.s_texture = mlx_xpm_file_to_image(game->data.mlx_ptr, \
-    "textures/brick.xpm", &game->data.texture_width, &game->data.texture_height);
+    game->map.south_texture, &game->data.texture_width, &game->data.texture_height);
     game->data.s_addr = mlx_get_data_addr(game->data.s_texture, \
     &game->data.bits_per_pixel, &game->data.line_length, &game->data.endian);
 
     game->data.w_texture = mlx_xpm_file_to_image(game->data.mlx_ptr, \
-    "textures/hitler.xpm", &game->data.texture_width, &game->data.texture_height);
+    game->map.west_texture, &game->data.texture_width, &game->data.texture_height);
     game->data.w_addr = mlx_get_data_addr(game->data.w_texture, \
     &game->data.bits_per_pixel, &game->data.line_length, &game->data.endian);
 
     game->data.e_texture = mlx_xpm_file_to_image(game->data.mlx_ptr, \  
-    "textures/eagle.xpm", &game->data.texture_width, &game->data.texture_height);
+    game->map.east_texture, &game->data.texture_width, &game->data.texture_height);
     game->data.e_addr = mlx_get_data_addr(game->data.e_texture, \
     &game->data.bits_per_pixel, &game->data.line_length, &game->data.endian);
  }
@@ -53,6 +58,10 @@ void    init_window(t_game* game)
     game->data.mlx_ptr = mlx_init(); 
     game->data.win_ptr = mlx_new_window(game->data.mlx_ptr, \
     game->map.width / 2, game->map.height, "Game");
+
+    game->data.win_ptr2 = mlx_new_window(game->data.mlx_ptr, \
+    game->map.width / 4, game->map.height / 4, "Map");
+    
     init_textures(game);
     game->data.img = mlx_new_image(game->data.mlx_ptr, \
     game->map.width, game->map.height);
@@ -87,6 +96,7 @@ void    set_window(t_game *game)
 
 int loop(t_game *game)
 {
+    minimap(game);
     cast_rays(game);
     return 0;
 }

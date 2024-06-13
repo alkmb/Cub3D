@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 00:36:56 by kmb               #+#    #+#             */
-/*   Updated: 2024/06/12 06:31:10 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/13 01:46:31 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ void    chose_lenght(t_game *game)
     if (game->rays->h_length < game->rays->v_length)
     {
         game->rays->total_length = game->rays->h_length;
-        // draw_ray(game, 0, game->rays->h_length);
+        draw_ray(game, 0, game->rays->h_length);
     }
     else
     {
         game->rays->total_length = game->rays->v_length;
-        // draw_ray(game, 0, game->rays->v_length);
+        draw_ray(game, 0, game->rays->v_length);
     }
 }
 

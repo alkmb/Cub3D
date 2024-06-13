@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 05:49:01 by kmb               #+#    #+#             */
-/*   Updated: 2024/06/12 16:45:51 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/13 01:39:12 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,13 +63,17 @@ int get_texture_color(int *texture, int tex_x, int tex_y, int tex_width, int tex
     return texture[index];
 }
 
-void    get_texture_pos(t_game *game)
+void get_texture_pos(t_game *game)
 {
-    game->data.texture_x = (int)(game->data.texture_width \
-    * (game->rays->ray / (float)game->map.width / 3));
-    
-    game->data.texture_y = (int)(game->data.texture_height \
-    * ((game->rays->win_i - game->rays->line_offset) / (float)game->rays->line_height));
+    float wall_x;
+    if (game->rays->h_length < game->rays->v_length)
+        wall_x = fmod(game->rays->horizontal_x, game->data.texture_width);
+    else
+        wall_x = fmod(game->rays->vertical_y, game->data.texture_width);
+
+    game->data.texture_x = (int)(wall_x);
+    game->data.texture_y = (int)((game->rays->win_i - \
+    game->rays->line_offset) / (float)game->rays->line_height * game->data.texture_height);
 }
 
 
@@ -82,7 +86,7 @@ void    draw_walls(t_game *game)
         {
             int color;
             if (game->rays->win_i < game->map.win_h 
-            && game->rays->h_length < game->rays->v_length && game->rays->angle < M_PI)
+            && game->rays->h_length < game->rays->v_length && game->rays->angle > M_PI)
             {  
                 get_texture_pos(game);
                 color = get_texture_color((int *)game->data.n_addr, \
@@ -90,26 +94,25 @@ void    draw_walls(t_game *game)
                 game->data.texture_width, game->data.texture_height);
             }
             else if (game->rays->win_i < game->map.win_h 
-            && game->rays->h_length > game->rays->v_length && game->rays->angle > M_PI)
-            {
+            && game->rays->h_length < game->rays->v_length && game->rays->angle < M_PI)
+            {  
                 get_texture_pos(game);
                 color = get_texture_color((int *)game->data.s_addr, \
                 game->data.texture_x, game->data.texture_y, \
                 game->data.texture_width, game->data.texture_height);
             }
             else if (game->rays->win_i < game->map.win_h 
-            && game->rays->h_length > game->rays->v_length && game->rays->angle < M_PI)
+            && game->rays->angle > M_PI_2 && game->rays->angle < 3 * M_PI_2)
             {
                 get_texture_pos(game);
-                color = get_texture_color((int *)game->data.w_addr, \
+                color = get_texture_color((int *)game->data.e_addr, \
                 game->data.texture_x, game->data.texture_y, \
                 game->data.texture_width, game->data.texture_height);
             }
-            else if (game->rays->win_i < game->map.win_h 
-            && game->rays->h_length < game->rays->v_length && game->rays->angle > M_PI)
-            {  
+            else
+            {
                 get_texture_pos(game);
-                color = get_texture_color((int *)game->data.e_addr, \
+                color = get_texture_color((int *)game->data.w_addr, \
                 game->data.texture_x, game->data.texture_y, \
                 game->data.texture_width, game->data.texture_height);
             }
@@ -125,8 +128,6 @@ void    draw_walls(t_game *game)
 void draw_window(t_game *game)
 {
     set_window(game);
-    // minmap(game);
-    // draw_player(game, 5, 5, 0x0000FF);
     draw_cealing(game);
     draw_walls(game);
     draw_floor(game);

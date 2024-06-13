@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 05:42:43 by kmb               #+#    #+#             */
-/*   Updated: 2024/06/12 06:36:25 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/13 01:28:09 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void draw_ray(t_game *game, int rayIndex, int length)
         x += xIncrement;
         y += yIncrement;
         mlx_pixel_put(game->data.mlx_ptr, \
-        game->data.win_ptr, round(x), round(y), 0xFFFFFF);
+        game->data.win_ptr2, round(x), round(y), 0xFFFFFF);
         k++;
     }
 }
@@ -64,7 +64,7 @@ void draw_player(t_game *game, int width, int height, int color)
         j = 0;
         while (j < width)
         {   
-            mlx_pixel_put(game->data.mlx_ptr, game->data.win_ptr, \
+            mlx_pixel_put(game->data.mlx_ptr, game->data.win_ptr2, \
              (game->player.x / 4) + j, (game->player.y / 4) + i, color);
             j++;
         }
@@ -74,7 +74,7 @@ void draw_player(t_game *game, int width, int height, int color)
 
 void minimap(t_game *game)
 {
-
+    draw_player(game, 5, 5, 0x0000FF);
     game->map.y = 0;
     game->map.mapS /= 4;
     game->map.cellSize /= 4;
@@ -94,7 +94,7 @@ void minimap(t_game *game)
                 game->map.j = 0;
                 while ( game->map.j <  game->map.cellSize)
                 {
-                    mlx_pixel_put(game->data.mlx_ptr, game->data.win_ptr,\
+                    mlx_pixel_put(game->data.mlx_ptr, game->data.win_ptr2,\
                     game->map.x * game->map.mapS + game->map.j, \
                     game->map.y * game->map.mapS + game->map.i, \
                     game->map.color);
@@ -109,5 +109,6 @@ void minimap(t_game *game)
     }
     game->map.mapS *= 4;
     game->map.cellSize *= 4;
+    
 
 }
