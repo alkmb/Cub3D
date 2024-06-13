@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 03:06:23 by kmb               #+#    #+#             */
-/*   Updated: 2024/06/13 01:25:41 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/13 02:44:19 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,10 +122,10 @@ typedef struct s_map
 
 typedef struct	s_data
 {
-	void    *mlx_ptr, *win_ptr, *win_ptr2;
+	float   wall_x;
+	void    *mlx_ptr;
+	void	*win_ptr;
 	void	*img;
-	void	*img2;
-	char	*addr2;
 	char	*addr;
 	char	*n_addr;
 	char	*s_addr;
@@ -142,6 +142,7 @@ typedef struct	s_data
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	int		color;
 }				t_data;
 
 typedef struct s_game

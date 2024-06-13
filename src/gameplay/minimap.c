@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 05:42:43 by kmb               #+#    #+#             */
-/*   Updated: 2024/06/13 01:28:09 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/13 03:02:43 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void draw_ray(t_game *game, int rayIndex, int length)
         x += xIncrement;
         y += yIncrement;
         mlx_pixel_put(game->data.mlx_ptr, \
-        game->data.win_ptr2, round(x), round(y), 0xFFFFFF);
+        game->data.win_ptr, round(x), round(y), 0xFFFFFF);
         k++;
     }
 }
@@ -55,16 +55,13 @@ void draw_player(t_game *game, int width, int height, int color)
     int i;
     int j;
 
-    width /= 4; 
-    height /= 4; 
-
     i = 0;
     while (i < height)
     {
         j = 0;
         while (j < width)
         {   
-            mlx_pixel_put(game->data.mlx_ptr, game->data.win_ptr2, \
+            mlx_pixel_put(game->data.mlx_ptr, game->data.win_ptr, \
              (game->player.x / 4) + j, (game->player.y / 4) + i, color);
             j++;
         }
@@ -94,7 +91,7 @@ void minimap(t_game *game)
                 game->map.j = 0;
                 while ( game->map.j <  game->map.cellSize)
                 {
-                    mlx_pixel_put(game->data.mlx_ptr, game->data.win_ptr2,\
+                    my_mlx_pixel_put(&game->data,\
                     game->map.x * game->map.mapS + game->map.j, \
                     game->map.y * game->map.mapS + game->map.i, \
                     game->map.color);

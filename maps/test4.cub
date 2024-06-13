@@ -1,7 +1,7 @@
-NO ./path_to_the_north_texture
-SO ./path_to_the_south_texture
-WE ./path_to_the_west_texture
-EA ./path_to_the_east_texture
+NO ./textures/wood.xpm
+SO ./textures/brick.xpm
+WE ./textures/hitler.xpm
+EA ./textures/eagle.xpm
 
 F 10,100,0
 C 0,30,0
@@ -13,4 +13,5 @@ C 0,30,0
 10000N00000001110000000000001
 10000000000001110000000000001
 10000000000011100000000001111
+11111111111111111111111111111
 11111111111111111111111111111

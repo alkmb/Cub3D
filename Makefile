@@ -14,13 +14,14 @@ LIBFT		= $(LIBFT_PATH)
 INC			=	-I ./includes/ -I ./lib/minilibx/ -I ./lib/libft/
 
 SRC_PATH	=	src/
-SRC			=	$(wildcard $(SRC_PATH)*.c $(SRC_PATH)*/*.c)
-OBJ_PATH	= obj/
-OBJ			= $(SRC:$(SRC_PATH)%.c=$(OBJ_PATH)%.o)
+SRC			=	$(shell find $(SRC_PATH) -name "*.c")
+OBJ_PATH	=	obj/
+OBJ			=	$(SRC:$(SRC_PATH)%.c=$(OBJ_PATH)%.o)
 
 all: $(MLX) $(LIBFT) $(NAME)
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
+	@mkdir -p $(dir $@)
 	@$(CC) $(CFLAGS) -c $< -o $@ $(INC)
 
 $(OBJ_PATH):

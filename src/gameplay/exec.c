@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 00:38:00 by kmb               #+#    #+#             */
-/*   Updated: 2024/06/13 02:15:37 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/13 03:29:40 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,26 +24,20 @@ void init_map(t_game *game)
 
 void init_textures(t_game *game)
  {
-    printf ("north:%s1\n" , game->map.north_texture);
-    printf ("%s\n" , game->map.south_texture);
-    printf ("%s\n" , game->map.west_texture);
-    printf ("%s\n" , game->map.east_texture);
-
+    game->data.texture_width = 128;
+    game->data.texture_height = 128;
     game->data.n_texture = mlx_xpm_file_to_image(game->data.mlx_ptr, \
     game->map.north_texture, &game->data.texture_width, &game->data.texture_height);
     game->data.n_addr = mlx_get_data_addr(game->data.n_texture, \
     &game->data.bits_per_pixel, &game->data.line_length, &game->data.endian);
-
     game->data.s_texture = mlx_xpm_file_to_image(game->data.mlx_ptr, \
     game->map.south_texture, &game->data.texture_width, &game->data.texture_height);
     game->data.s_addr = mlx_get_data_addr(game->data.s_texture, \
     &game->data.bits_per_pixel, &game->data.line_length, &game->data.endian);
-
     game->data.w_texture = mlx_xpm_file_to_image(game->data.mlx_ptr, \
     game->map.west_texture, &game->data.texture_width, &game->data.texture_height);
     game->data.w_addr = mlx_get_data_addr(game->data.w_texture, \
     &game->data.bits_per_pixel, &game->data.line_length, &game->data.endian);
-
     game->data.e_texture = mlx_xpm_file_to_image(game->data.mlx_ptr, \  
     game->map.east_texture, &game->data.texture_width, &game->data.texture_height);
     game->data.e_addr = mlx_get_data_addr(game->data.e_texture, \
@@ -52,17 +46,11 @@ void init_textures(t_game *game)
 
 void    init_window(t_game* game)
 {
-    game->data.texture_width = 64;
-    game->data.texture_height = 64;
-    
-    game->data.mlx_ptr = mlx_init(); 
-    game->data.win_ptr = mlx_new_window(game->data.mlx_ptr, \
-    game->map.width / 2, game->map.height, "Game");
 
-    game->data.win_ptr2 = mlx_new_window(game->data.mlx_ptr, \
-    game->map.width / 4, game->map.height / 4, "Map");
-    
+    game->data.mlx_ptr = mlx_init(); 
     init_textures(game);
+    game->data.win_ptr = mlx_new_window(game->data.mlx_ptr, \
+    game->map.width / 1.5, game->map.height, "Game");
     game->data.img = mlx_new_image(game->data.mlx_ptr, \
     game->map.width, game->map.height);
     game->data.addr = mlx_get_data_addr(game->data.img, \
@@ -80,23 +68,10 @@ void init_game(t_game *game)
     game->map.width = game->map.mapX;
 }
 
-void    set_window(t_game *game)
-{
-    game->map.win_h = game->map.mapY * game->map.mapS;
-    game->map.win_w = game->map.mapX * game->map.mapS;
-    game->rays->ray_width = game->map.win_w / 120;
-    game->rays->line_height = (game->map.mapS * \
-    game->map.win_h) / game->rays->total_length;
-
-    if (game->rays->line_height > game->map.win_h)
-        game->rays->line_height = game->map.win_h;
-    game->rays->line_offset = game->map.win_h / 2 - \
-    game->rays->line_height / 2;
-}
-
 int loop(t_game *game)
 {
-    minimap(game);
     cast_rays(game);
+    mlx_put_image_to_window(game->data.mlx_ptr, game->data.win_ptr, \
+    game->data.img, 0, 0);
     return 0;
 }

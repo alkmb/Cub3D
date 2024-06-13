@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 00:36:56 by kmb               #+#    #+#             */
-/*   Updated: 2024/06/13 01:46:31 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/13 03:23:11 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void cast_rays(t_game *game)
 {
     get_angle(game);
     game->rays->ray = 0;
-    while (game->rays->ray < 60)
+    while (game->rays->ray < 90)
     {
         reset_angle(game);
         reset_horizontal(game);
