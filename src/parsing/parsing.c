@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 09:18:04 by gprada-t          #+#    #+#             */
-/*   Updated: 2024/06/13 02:14:07 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/14 23:10:28 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ int	parse_map(t_game *game, char *line)
 			|| line[i] == 'E' || line[i] == 'W')
 		{
 			game->player.x = i;
-			game->player.y = game->map.mapY;
+			game->player.y = game->map.mapy;
 			game->player.angle = line[i];
 			player++;
 			if (player > 1)

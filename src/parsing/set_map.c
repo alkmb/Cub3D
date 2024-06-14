@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gprada-t <gprada-t@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 15:47:08 by gprada-t          #+#    #+#             */
-/*   Updated: 2024/06/10 13:28:41 by gprada-t         ###   ########.fr       */
+/*   Updated: 2024/06/14 23:10:47 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,10 @@ void	setting_map_x_map_y(char *str_map, t_game *game)
 	{
 		if (str_map[i] == '\n')
 		{
-			if (line > game->map.mapX)
-				game->map.mapX = line;
+			if (line > game->map.mapx)
+				game->map.mapx = line;
 			line = 0;
-			game->map.mapY++;
+			game->map.mapy++;
 		}
 		else
 		{
@@ -91,7 +91,7 @@ void	setting_map_x_map_y(char *str_map, t_game *game)
 				line++;
 		}
 	}
-	game->map.mapY++;
+	game->map.mapy++;
 }
 
 int		check_closed_map(t_game *game)
@@ -100,9 +100,9 @@ int		check_closed_map(t_game *game)
 	int j;
 
 	i = 0;
-	if (game->map.mapX < 3 || game->map.mapY < 3)
+	if (game->map.mapx < 3 || game->map.mapy < 3)
 		return (cub_error("Error\nToo Small map\n", FAILURE));
-	while (i < game->map.mapX * game->map.mapY)
+	while (i < game->map.mapx * game->map.mapy)
 	{
 		if (game->map.map[i] == 0 && (game->map.map[i + 1] == 2 || game->map.map[i - 1] == 2))
 			return (cub_error("Error\nInvalid map\n", FAILURE));
@@ -118,7 +118,7 @@ int		mapping(t_game *game)
 	if (!game->map.temp_map)
 		return (cub_error("Error\nInvalid map\n", FAILURE));
 	setting_map_x_map_y(game->map.temp_map, game);
-	game->map.map = str_to_int_array(game->map.temp_map, game->map.mapX);
+	game->map.map = str_to_int_array(game->map.temp_map, game->map.mapx);
 	//if (check_closed_map(game))
 	//	return (cub_error("Error\nMap is open\n", FAILURE));
 	return (SUCCESS);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gprada-t <gprada-t@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 12:51:00 by gprada-t          #+#    #+#             */
-/*   Updated: 2024/06/10 12:40:06 by gprada-t         ###   ########.fr       */
+/*   Updated: 2024/06/14 23:10:11 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,10 @@ void    init_parsing_data(t_game *game)
 	game->map.west_texture = NULL;
 	game->map.map = NULL;
 	game->map.temp_map = NULL;
-	game->map.mapX = 0;
-	game->map.mapY = 0;
+	game->map.mapx = 0;
+	game->map.mapy = 0;
 	game->map.width = 0;
 	game->map.height = 0;
-	game->map.mapS = 64;
-	game->map.cellSize = 63;
+	game->map.maps = 64;
+	game->map.cellsize = 63;
 }
