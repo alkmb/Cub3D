@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 22:01:52 by akambou           #+#    #+#             */
-/*   Updated: 2024/06/15 00:44:57 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/15 03:26:18 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	spawn_player(t_game *game)
 
 void	player_movement(int keycode, t_game *game)
 {
-	set_window(game);
 	if (keycode == KEY_W)
 	{
 		game->player.nextx += game->player.delta_x;
@@ -62,11 +61,10 @@ void	player_movement(int keycode, t_game *game)
 
 void	player_angle(int keycode, t_game *game)
 {
-	set_window(game);
 	if (keycode == KEY_RIGHT)
 	{
 		game->player.angle += 0.1;
-		if (game->player.angle > 0)
+		if (game->player.angle > 2 * M_PI)
 			game->player.angle -= (2 * M_PI);
 		game->player.delta_x = cos(game->player.angle) * 5;
 		game->player.delta_y = sin(game->player.angle) * 5;
@@ -74,8 +72,8 @@ void	player_angle(int keycode, t_game *game)
 	else if (keycode == KEY_LEFT)
 	{
 		game->player.angle -= 0.1;
-		if (game->player.angle > 0)
-			game->player.angle -= (2 * M_PI);
+		if (game->player.angle < 0)
+			game->player.angle += (2 * M_PI);
 		game->player.delta_x = cos(game->player.angle) * 5;
 		game->player.delta_y = sin(game->player.angle) * 5;
 	}

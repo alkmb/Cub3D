@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 22:44:22 by akambou           #+#    #+#             */
-/*   Updated: 2024/06/15 00:01:28 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/15 10:42:31 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	vertical_direction(t_game *game)
 	ntan = -tan(game->rays->angle);
 	if (game->rays->angle > M_PI_2 && game->rays->angle < 3 * M_PI_2)
 	{
-		game->rays->ray_x = (((int)game->player.x >> 6) << 6) - 0.0001;
+		game->rays->ray_x = (((int)game->player.x >> 6) << 6) - 1;
 		game->rays->ray_y = (game->player.x - game->rays->ray_x) * \
 		ntan + game->player.y;
 		game->rays->x_offset = -64;

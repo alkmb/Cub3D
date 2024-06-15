@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 21:12:01 by akambou           #+#    #+#             */
-/*   Updated: 2024/06/15 00:49:31 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/15 10:46:27 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,12 +54,13 @@ void	draw_floor(t_game *game)
 
 void	set_window(t_game *game)
 {
-	if (game == NULL || game->rays == NULL || game->rays->total_length == 0 \
-		|| game->map.win_h == 0 || game->map.win_w == 0)
+	if (game == NULL || game->rays == NULL || game->rays->total_length == 0)
 		return ;
-	game->rays->ray_width = game->map.win_w / 180;
+	game->map.win_w = 1920;
+	game->map.win_h = 1080;
+	game->rays->ray_width = game->map.win_w / 120;
 	game->rays->line_height = (game->map.maps * \
-	game->map.win_h) / game->rays->total_length;
+	game->map.win_w) / game->rays->total_length * 0.4;
 	if (game->rays->line_height > game->map.win_h)
 		game->rays->line_height = game->map.win_h;
 	if (game->rays->line_height == 0)
@@ -73,7 +74,7 @@ void	draw_walls(t_game *game)
 	game->rays->line_height + game->rays->line_offset)
 	{
 		game->rays->win_j = 0;
-		while (game->rays->win_j < game->rays->ray_width * 2)
+		while (game->rays->win_j < game->rays->ray_width)
 		{
 			select_wall(game);
 			my_mlx_pixel_put(&game->data, game->rays->ray * \

@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 23:00:41 by akambou           #+#    #+#             */
-/*   Updated: 2024/06/15 00:17:03 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/15 03:10:28 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <X11/X.h>
+# include <X11/Xlib.h>
 //-----------------------PATH-INCLUDES-----------------------------------------
 # include "../lib/minilibx/mlx.h"
 # include "../lib/libft/includes/libft.h"
@@ -180,7 +182,7 @@ typedef struct s_game
 	t_data		data;
 	t_data		texture;
 	t_line		line;
-	t_ray		rays[60];
+	t_ray		rays[90];
 }	t_game;
 
 //-----------------------PARSING-----------------------------------------------
@@ -224,6 +226,7 @@ void		player_movement(int keycode, t_game *game);
 void		player_angle(int keycode, t_game *game);
 int			key_press(int keycode, t_game *game);
 int			is_wall(t_game *game, float x, float y);
+int			mouse_move(int x, int y, t_game *game);
 
 //-----------------------MINIMAP----------------------------------------------
 void		minimap(t_game *game);
