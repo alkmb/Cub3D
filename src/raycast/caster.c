@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 22:42:26 by akambou           #+#    #+#             */
-/*   Updated: 2024/06/15 10:33:51 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/16 13:15:46 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	chose_lenght(t_game *game)
 
 void	get_angle(t_game *game)
 {
-	game->rays->angle = game->player.angle - (DR * 42);
+	game->rays->angle = game->player.angle - (DR * 80);
 	if (game->rays->angle < 0)
 		game->rays->angle += 2 * M_PI;
 	if (game->rays->angle > 2 * M_PI)
@@ -57,10 +57,10 @@ void	cast_rays(t_game *game)
 {
 	get_angle(game);
 	game->rays->ray = 0;
-	while (game->rays->ray < 120)
+	while (game->rays->ray < 200)
 	{
 		mlx_mouse_move(game->data.mlx_ptr, game->data.win_ptr, \
-		(game->map.win_w / 2) - 420, game->map.win_h / 2);
+		(game->map.win_w / 2) - 60, game->map.win_h / 2);
 		reset_angle(game);
 		reset_horizontal(game);
 		horizontal_direction(game);

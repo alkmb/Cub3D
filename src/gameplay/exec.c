@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 22:13:19 by akambou           #+#    #+#             */
-/*   Updated: 2024/06/15 10:54:27 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/16 13:00:28 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ void	init_window(t_game *game)
 	game->data.mlx_ptr = mlx_init();
 	init_textures(game);
 	game->data.win_ptr = mlx_new_window(game->data.mlx_ptr, \
-	1920, 1080, "Game");
+	1200, 800, "Game");
 	game->data.img = mlx_new_image(game->data.mlx_ptr, \
-	1920, 1080);
+	1200, 800);
 	game->data.addr = mlx_get_data_addr(game->data.img, \
 	&game->data.bits_per_pixel, &game->data.line_length, &game->data.endian);
 }

@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 21:12:01 by akambou           #+#    #+#             */
-/*   Updated: 2024/06/15 10:46:27 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/16 13:16:51 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	draw_cealing(t_game *game)
 		{
 			texture_pos_cf(game);
 			game->data.color = get_texture_color1((int *) \
-			game->data.ceiling_addr, game->data.texture_x, \
-			game->data.texture_y, game);
+			game->data.ceiling_addr, game->data.texture_x / 2, \
+			game->data.texture_y / 2, game);
 			my_mlx_pixel_put(&game->data, game->rays->ray * \
 			game->rays->ray_width + game->rays->win_j, \
 			game->rays->win_i, game->data.color);
@@ -42,7 +42,7 @@ void	draw_floor(t_game *game)
 		{
 			texture_pos_cf(game);
 			game->data.color = get_texture_color1((int *)game->data.floor_addr, \
-			game->data.texture_x, game->data.texture_y, game);
+			game->data.texture_x / 2, game->data.texture_y / 2, game);
 			my_mlx_pixel_put(&game->data, game->rays->ray * \
 			game->rays->ray_width + game->rays->win_j, \
 			game->rays->win_i, game->data.color);
@@ -56,11 +56,11 @@ void	set_window(t_game *game)
 {
 	if (game == NULL || game->rays == NULL || game->rays->total_length == 0)
 		return ;
-	game->map.win_w = 1920;
-	game->map.win_h = 1080;
-	game->rays->ray_width = game->map.win_w / 120;
+	game->map.win_w = 1200;
+	game->map.win_h = 800;
+	game->rays->ray_width = game->map.win_w / 180;
 	game->rays->line_height = (game->map.maps * \
-	game->map.win_w) / game->rays->total_length * 0.4;
+	game->map.win_w) / game->rays->total_length * 0.3	;
 	if (game->rays->line_height > game->map.win_h)
 		game->rays->line_height = game->map.win_h;
 	if (game->rays->line_height == 0)
