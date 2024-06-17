@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 09:18:04 by gprada-t          #+#    #+#             */
-/*   Updated: 2024/06/14 23:10:28 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/17 07:46:52 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ int	parse_map(t_game *game, char *line)
 		i++;
 	}
 	game->map.temp_map = ft_strjoin(game->map.temp_map, line);
+	printf ("line : %s\n", line);
 	return (SUCCESS);
 }
 

@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 22:44:22 by akambou           #+#    #+#             */
-/*   Updated: 2024/06/15 10:42:31 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/17 07:36:36 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,19 @@ void	set_vertical(t_game *game)
 {
 	game->rays->mx = (int)game->rays->ray_x >> 6;
 	game->rays->my = (int)game->rays->ray_y >> 6;
-	if (game->rays->mx >= 0 && game->rays->mx < game->map.width
-		&& game->rays->my >= 0 && game->rays->my < game->map.height)
-		game->rays->mp = game->rays->my * game->map.width + game->rays->mx;
+	if (game->rays->mx >= 0 && game->rays->mx < game->map.mapx
+		&& game->rays->my >= 0 && game->rays->my < game->map.mapy)
+		game->rays->mp = game->rays->my * game->map.mapx + game->rays->mx;
 }
 
 void	cast_vertical(t_game *game)
 {
-	while (game->rays->deapht_of_field < 30)
+	while (game->rays->deapht_of_field < 30 && game->rays->mp >= 0 && \
+	game->rays->mp < (game->map.mapx * game->map.mapy - 1))
 	{
 		set_vertical(game);
-		if (game->rays->mp > 0 && game->rays->mp < \
-		game->map.width * game->map.height \
+		if (game->rays->mp >= 0 && game->rays->mp < \
+		(game->map.mapy * game->map.mapx - 1) \
 		&& game->map.map[game->rays->mp] == 1)
 		{
 			game->rays->vertical_x = game->rays->ray_x;

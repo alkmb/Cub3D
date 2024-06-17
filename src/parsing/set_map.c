@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 15:47:08 by gprada-t          #+#    #+#             */
-/*   Updated: 2024/06/14 23:10:47 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/17 09:39:15 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,17 @@ int		*str_to_int_array(char *map, int max_x)
 	int j;
 	int *array;
 	int len;
-
+	int index;
+	
 	i = 0;
 	j = 0;
-	len = calculate_size(map);
+	len = calculate_size(map) * 4;
 	printf("mapsize-->: %d\n", len);
-	array = malloc(sizeof(int) * len);
+	array = malloc(sizeof(int) * len * 2);
 	if (!array)
 		return (NULL);
-	int index = 0;
+	i = 0;
+	index = 0;
 	while (map[i] && index < len)
 	{
 		if (map[i] == '0') {
@@ -91,7 +93,7 @@ void	setting_map_x_map_y(char *str_map, t_game *game)
 				line++;
 		}
 	}
-	game->map.mapy++;
+	game->map.mapy ++;
 }
 
 int		check_closed_map(t_game *game)
@@ -117,6 +119,14 @@ int		mapping(t_game *game)
 		game->map.temp_map++;
 	if (!game->map.temp_map)
 		return (cub_error("Error\nInvalid map\n", FAILURE));
+	int i = 0;
+	while (game->map.temp_map[i])
+	{
+		if ((game->map.temp_map[i] == '\n' && game->map.temp_map[i + 1] == '\0') \
+			|| (game->map.temp_map[i] == '\n' && game->map.temp_map[i + 1] == '\n'))
+			game->map.temp_map[i] = '\0';
+		i++;
+	}
 	setting_map_x_map_y(game->map.temp_map, game);
 	game->map.map = str_to_int_array(game->map.temp_map, game->map.mapx);
 	//if (check_closed_map(game))

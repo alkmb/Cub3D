@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 22:13:19 by akambou           #+#    #+#             */
-/*   Updated: 2024/06/17 04:57:22 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/17 09:21:51 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	init_map(t_game *game)
 {
-	game->map.mapy -= 1;
 	game->map.height = (game->map.mapy * game->map.maps);
 	game->map.width = (game->map.mapx * game->map.maps);
 	game->map.cell = game->map.map[game->map.y * \
