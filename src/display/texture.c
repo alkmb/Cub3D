@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 22:06:20 by akambou           #+#    #+#             */
-/*   Updated: 2024/06/17 04:20:55 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/17 14:08:53 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	texture_pos_cf(t_game *game)
 {
+	game->data.texture_width = 64;
+	game->data.texture_height = 64;
 	game->data.current_dist = game->map.win_h / (2.0 * \
 	game->rays->win_i - game->map.win_h);
 	game->data.weight = game->data.current_dist / game->rays->v_length;
@@ -69,14 +71,14 @@ void	get_texture_pos(t_game *game)
 
 void	select_wall(t_game *game)
 {
-	if (game->rays->win_i < game->map.win_h \
-	&& game->rays->h_length < game->rays->v_length && game->rays->angle > M_PI)
+	if (game->rays->win_i < game->map.win_h && \
+	game->rays->h_length < game->rays->v_length && game->rays->angle > M_PI)
 	{
 		get_texture_pos(game);
 		game->data.color = get_texture_color((int *)game->data.n_addr, game);
 	}
-	else if (game->rays->win_i < game->map.win_h \
-	&& game->rays->h_length < game->rays->v_length && game->rays->angle < M_PI)
+	else if (game->rays->win_i < game->map.win_h && game->rays->h_length \
+	< game->rays->v_length && game->rays->angle < M_PI)
 	{
 		get_texture_pos(game);
 		game->data.color = get_texture_color((int *)game->data.s_addr, game);
@@ -87,9 +89,10 @@ void	select_wall(t_game *game)
 		get_texture_pos(game);
 		game->data.color = get_texture_color((int *)game->data.e_addr, game);
 	}
-	else
+	else if (game->map.map[game->rays->mp] != 7)
 	{
 		get_texture_pos(game);
 		game->data.color = get_texture_color((int *)game->data.w_addr, game);
 	}
+	check_door(game);
 }

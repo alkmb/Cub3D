@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 21:40:38 by akambou           #+#    #+#             */
-/*   Updated: 2024/06/17 09:22:26 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/17 13:54:25 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,27 +47,6 @@ void	draw_ray(t_game *game, int rayIndex, int length)
 	display_ray(game);
 }
 
-void	draw_player(t_game *game, int width, int height, int color)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < height)
-	{
-		j = 0;
-		while (j < width)
-		{
-			mlx_pixel_put(game->data.mlx_ptr, game->data.win_ptr, \
-			(game->player.x / 8) + j, (game->player.y / 8) + i, color);
-			j++;
-		}
-		i++;
-	}
-	game->map.maps /= 8;
-	game->map.cellsize /= 8;
-}
-
 void	set_cell(t_game *game)
 {
 	game->map.cell = game->map.map[game->map.y \
@@ -83,9 +62,6 @@ void	set_cell(t_game *game)
 
 void	minimap(t_game *game)
 {
-	game->rays->angle = game->player.angle - (DR);
-	draw_ray(game, 0, 200);
-	game->rays->angle = game->player.angle + (DR);
 	while (game->map.y < game->map.mapy)
 	{
 		game->map.x = 0;

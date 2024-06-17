@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 15:47:08 by gprada-t          #+#    #+#             */
-/*   Updated: 2024/06/17 09:39:15 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/17 11:07:18 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ int		*str_to_int_array(char *map, int max_x)
 				array[index++] = 2;
 			}
 		}
+		else if (map[i] == 'D')
+			array[index++] = 7;
 		i++;
 	}
 	return (array);

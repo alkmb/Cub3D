@@ -1,7 +1,8 @@
-NO ./textures/banner.xpm
-SO ./textures/eagle.xpm
-WE ./textures/hitler.xpm
-EA ./textures/grey.xpm
+NO ./textures/metal1.xpm
+SO ./textures/metal2.xpm
+WE ./textures/metal3.xpm
+EA ./textures/metal4.xpm
+
 F 10,100,0
 C 225,30,0
 

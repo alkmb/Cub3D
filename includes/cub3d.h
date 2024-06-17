@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 23:00:41 by akambou           #+#    #+#             */
-/*   Updated: 2024/06/17 05:04:17 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/17 14:09:19 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,10 @@ typedef struct s_data
 	char	*shot_addr;
 	char	*crosshair_addr;
 	char	*life_addr;
+	char	*door_addr;
+	char	*door1_addr;
+	void	*door1_texture;
+	void	*door_texture;
 	void	*shot_texture;
 	void	*life_texture;
 	void	*crosshair_texture;
@@ -212,12 +216,15 @@ void		init_game(t_game *game);
 void		init_map(t_game *game);
 void		init_window(t_game *game);
 void		init_parsing_data(t_game *game);
+void		init_textures(t_game *game);
+void		init_hud(t_game *game);
+void		init_floor_ceiling_and_doors(t_game *game);
 int			loop(t_game *game);
 
 //--------------------WINDOW--------------------------------------------------
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void		set_window(t_game *game);
-void		draw_cealing(t_game *game);
+void		draw_ceiling(t_game *game);
 void		draw_floor(t_game *game);
 void		draw_walls(t_game *game);
 void		draw_window(t_game *game);
@@ -261,5 +268,6 @@ void		draw_weapon(t_game *game);
 void		draw_life(t_game *game);
 void		draw_shot(t_game *game);
 int			shoot(int button, int x, int y, void *param);
+void		check_door(t_game *game);
 
 #endif

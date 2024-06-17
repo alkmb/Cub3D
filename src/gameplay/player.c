@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 22:01:52 by akambou           #+#    #+#             */
-/*   Updated: 2024/06/17 05:02:35 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/17 13:51:48 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,14 +93,4 @@ int	key_press(int keycode, t_game *game)
 		game->player.y = game->player.nexty;
 	}
 	return (0);
-}
-
-int	is_wall(t_game *game, float x, float y)
-{
-	int	mapx;
-	int	mapy;
-
-	mapx = (int)(x / game->map.maps);
-	mapy = (int)(y / game->map.maps);
-	return (game->map.map[mapy * game->map.width + mapx] == 1);
 }
