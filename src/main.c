@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 03:07:46 by kmb               #+#    #+#             */
-/*   Updated: 2024/06/15 03:26:00 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/17 05:05:42 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,9 @@ int	main(int argc, char **argv)
 	init_game(&game);
 	mlx_hook(game.data.win_ptr, MotionNotify, \
 	PointerMotionMask, &mouse_move, &game);
+	mlx_mouse_hook(game.data.win_ptr, shoot, &game);
 	mlx_hook(game.data.win_ptr, 2, 1, key_press, &game);
+	mlx_mouse_hide(game.data.mlx_ptr, game.data.win_ptr);
 	mlx_loop_hook(game.data.mlx_ptr, loop, &game);
 	mlx_loop(game.data.mlx_ptr);
 }

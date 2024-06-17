@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 21:40:38 by akambou           #+#    #+#             */
-/*   Updated: 2024/06/15 02:18:23 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/17 01:32:00 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,9 @@ void	set_cell(t_game *game)
 
 void	minimap(t_game *game)
 {
+	game->rays->angle = game->player.angle - (DR);
+	draw_ray(game, 0, 200);
+	game->rays->angle = game->player.angle + (DR);
 	while (game->map.y < game->map.mapy)
 	{
 		game->map.x = 0;

@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 22:06:20 by akambou           #+#    #+#             */
-/*   Updated: 2024/06/16 13:07:15 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/17 04:20:55 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	texture_pos_cf(t_game *game)
 	game->rays->win_i - game->map.win_h);
 	game->data.weight = game->data.current_dist / game->rays->v_length;
 	game->data.current_ceiling_x = game->data.weight * \
-	game->rays->ray_x + (0.5 - game->data.weight) * game->player.x;
+	game->rays->ray_x + (1.0 - game->data.weight) * game->player.x;
 	game->data.current_ceiling_y = game->data.weight * \
-	game->rays->ray_y + (0.5 - game->data.weight) * game->player.y;
+	game->rays->ray_y + (1.0 - game->data.weight) * game->player.y;
 	game->data.texture_x = (int)(game->data.current_ceiling_x * \
 	game->data.texture_width) % game->data.texture_width;
 	game->data.texture_y = (int)(game->data.current_ceiling_y * \
@@ -34,7 +34,7 @@ int tex_y, t_game *game)
 
 	if (tex_x < 0 || tex_x >= game->data.texture_width
 		|| tex_y < 0 || tex_y >= game->data.texture_height)
-		return (0);
+		return (-1);
 	index = tex_y * game->data.texture_width + tex_x;
 	return (texture[index]);
 }
@@ -47,7 +47,7 @@ int	get_texture_color(int *texture, t_game *game)
 		|| game->data.texture_x >= game->data.texture_width
 		|| game->data.texture_x < 0
 		|| game->data.texture_y >= game->data.texture_height)
-		return (0);
+		return (-1);
 	index = game->data.texture_y * game->data.texture_width \
 	+ game->data.texture_x;
 	return (texture[index]);

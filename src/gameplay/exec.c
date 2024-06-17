@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 22:13:19 by akambou           #+#    #+#             */
-/*   Updated: 2024/06/16 13:00:28 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/17 04:57:22 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,32 @@ void	init_floor_and_cealing(t_game *game)
 
 void	init_textures(t_game *game)
 {
-	game->data.texture_width = 128;
-	game->data.texture_height = 128;
+	game->data.weapon_texture = mlx_xpm_file_to_image(game->data.mlx_ptr, \
+	"./textures/pistol.xpm", &game->data.texture_width, \
+	&game->data.texture_height);
+	game->data.weapon_addr = mlx_get_data_addr(game->data.weapon_texture, \
+	&game->data.bits_per_pixel, &game->data.line_length, \
+	&game->data.endian);
+	game->data.crosshair_texture = mlx_xpm_file_to_image(game->data.mlx_ptr, \
+	"./textures/aim.xpm", &game->data.texture_width, \
+	&game->data.texture_height);
+	game->data.crosshair_addr = mlx_get_data_addr(game->data.crosshair_texture, \
+	&game->data.bits_per_pixel, &game->data.line_length, \
+	&game->data.endian);
+	game->data.life_texture = mlx_xpm_file_to_image(game->data.mlx_ptr, \
+	"./textures/lifebar.xpm", &game->data.texture_width, \
+	&game->data.texture_height);
+	game->data.life_addr = mlx_get_data_addr(game->data.life_texture, \
+	&game->data.bits_per_pixel, &game->data.line_length, \
+	&game->data.endian);
+	game->data.shot_texture = mlx_xpm_file_to_image(game->data.mlx_ptr, \
+	"./textures/shot.xpm", &game->data.texture_width, \
+	&game->data.texture_height);
+	game->data.shot_addr = mlx_get_data_addr(game->data.shot_texture, \
+	&game->data.bits_per_pixel, &game->data.line_length, \
+	&game->data.endian);
+
+
 	game->data.n_texture = mlx_xpm_file_to_image(game->data.mlx_ptr, \
 	game->map.north_texture, &game->data.texture_width, \
 	&game->data.texture_height);

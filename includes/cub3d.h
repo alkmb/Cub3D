@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 23:00:41 by akambou           #+#    #+#             */
-/*   Updated: 2024/06/15 03:10:28 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/17 05:04:17 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,14 @@ typedef struct s_data
 	char	*e_addr;
 	char	*floor_addr;
 	char	*ceiling_addr;
+	char	*weapon_addr;
+	char	*shot_addr;
+	char	*crosshair_addr;
+	char	*life_addr;
+	void	*shot_texture;
+	void	*life_texture;
+	void	*crosshair_texture;
+	void	*weapon_texture;
 	void	*n_texture;
 	void	*s_texture;
 	void	*w_texture;
@@ -247,5 +255,11 @@ void		vertical_direction(t_game *game);
 void		reset_vertical(t_game *game);
 
 //-----------------------UTILS-------------------------------------------------
+
+void		draw_crosshair(t_game *game);
+void		draw_weapon(t_game *game);
+void		draw_life(t_game *game);
+void		draw_shot(t_game *game);
+int			shoot(int button, int x, int y, void *param);
 
 #endif
