@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 22:44:22 by akambou           #+#    #+#             */
-/*   Updated: 2024/06/17 13:16:02 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/17 21:06:58 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ void	set_vertical(t_game *game)
 
 void	cast_vertical(t_game *game)
 {
-	while (game->rays->deapht_of_field < 30 && game->rays->mp >= 0 && \
-	game->rays->mp < (game->map.mapx * game->map.mapy - 1))
+	while (game->rays->deapht_of_field < 30 && game->rays->mp > 0 && \
+	game->rays->mp < (game->map.mapx * game->map.mapy))
 	{
 		set_vertical(game);
 		if (game->rays->mp >= 0 && game->rays->mp < \
 		(game->map.mapy * game->map.mapx - 1) \
 		&& (game->map.map[game->rays->mp] == 1 \
-		|| game->map.map[game->rays->mp] == 7))
+		|| game->map.map[game->rays->mp] == 7 || game->map.map[game->rays->mp] == 8))
 		{
 			game->rays->vertical_x = game->rays->ray_x;
 			game->rays->vertical_y = game->rays->ray_y;

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.c                                             :+:      :+:    :+:   */
+/*   init_window.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 22:13:19 by akambou           #+#    #+#             */
-/*   Updated: 2024/06/17 14:00:09 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/18 00:54:00 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,12 @@ void	init_floor_ceiling_and_doors(t_game *game)
 	game->data.door1_addr = mlx_get_data_addr(game->data.door1_texture, \
 	&game->data.bits_per_pixel, &game->data.line_length, \
 	&game->data.endian);
+	game->data.enem_texture = mlx_xpm_file_to_image(game->data.mlx_ptr, \
+	"./textures/barrel.xpm", &game->data.texture_width, \
+	&game->data.texture_height);
+	game->data.enem_addr = mlx_get_data_addr(game->data.enem_texture, \
+	&game->data.bits_per_pixel, &game->data.line_length, \
+	&game->data.endian);
 }
 
 void	init_textures(t_game *game)
@@ -82,11 +88,12 @@ void	init_window(t_game *game)
 	game->data.mlx_ptr = mlx_init();
 	init_textures(game);
 	game->data.win_ptr = mlx_new_window(game->data.mlx_ptr, \
-	1200, 800, "Game");
+	960, 640, "Game");
 	game->data.img = mlx_new_image(game->data.mlx_ptr, \
-	1200, 800);
+	960, 640);
 	game->data.addr = mlx_get_data_addr(game->data.img, \
 	&game->data.bits_per_pixel, &game->data.line_length, &game->data.endian);
+
 }
 
 void	init_game(t_game *game)

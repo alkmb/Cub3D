@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 23:00:41 by akambou           #+#    #+#             */
-/*   Updated: 2024/06/17 14:09:19 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/18 01:38:59 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,8 @@ typedef struct s_data
 	char	*door_addr;
 	char	*door1_addr;
 	void	*door1_texture;
+	char	*enem_addr;
+	void	*enem_texture;
 	void	*door_texture;
 	void	*shot_texture;
 	void	*life_texture;
@@ -187,11 +189,31 @@ typedef struct s_line
 	int		end_y;
 }	t_line;
 
+typedef struct s_sprite
+{
+	int type;
+	int x;
+	int y;
+	int z;
+	int *texture;
+	int *rotated_texture;
+	int visible;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int		texture_width;
+	int		texture_height;
+	int		screen_x;
+	int		screen_y;
+} t_sprite;
+
 typedef struct s_game
 {
 	t_player	player;
 	t_map		map;
 	t_data		data;
+	t_sprite	sprite;
 	t_data		texture;
 	t_line		line;
 	t_ray		rays[90];
@@ -247,6 +269,7 @@ int			mouse_move(int x, int y, t_game *game);
 void		minimap(t_game *game);
 void		draw_ray(t_game *game, int rayIndex, int lenght);
 void		draw_player(t_game *game, int width, int height, int color);
+void		draw_sprite(t_game *game);
 
 //-----------------------CASTER------------------------------------------------
 float		distance(float x1, float y1, float x2, float y2);
