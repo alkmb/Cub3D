@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 13:48:37 by akambou           #+#    #+#             */
-/*   Updated: 2024/06/17 21:39:55 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/17 13:49:35 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,8 @@
 
 int	shoot(int button, int x, int y, void *param)
 {
-	int	i;
-
-	i = 0;
 	if (button == 1)
-	{
-		while (i < 20)
-		{
-			draw_shot(param);
-			i++;
-		}
-
-	}
+		draw_shot(param);
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: gprada-t <gprada-t@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 18:03:29 by gprada-t          #+#    #+#             */
-/*   Updated: 2024/06/10 12:37:24 by gprada-t         ###   ########.fr       */
+/*   Updated: 2024/06/18 19:15:04 by gprada-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	rgb_to_int(t_color color)
 	return (color.r << 16 | color.g << 8 | color.b);
 }
 
-char	*get_color(char *line)
+int	get_color(char *line)
 {
 	int		i;
 	char	*color;
@@ -27,28 +27,32 @@ char	*get_color(char *line)
 		i++;
 	color = malloc(sizeof(char) * i + 1);
 	if (!color)
-		return (NULL);
+		return (-2);
 	ft_strlcpy(color, line, i + 1);
-	return (color);
+	i = ft_atoi(color);
+	free(color);
+	return (i);
 }
+
+//int	path_or_color(t_game *game, char *line)
+//{
+//	while (ft_isspace(*line))
+//		line++;
+//	if (ft_isdigit(*line))
+//		return (set_path(game, line));
+//}
 
 int	get_rgb(t_color *color, char *line)
 {
 	if (color->r == -1)
-	{
-		color->r = ft_atoi(get_color(line));
-		line += ft_strlen(get_color(line)) + 1;
-	}
+		color->r = get_color(line);
 	if (color->g == -1)
-	{
-		color->g = ft_atoi(get_color(line));
-		line += ft_strlen(get_color(line)) + 1;
-	}
+		color->g = get_color(line);
 	if (color->b == -1)
-		color->b = ft_atoi(get_color(line));
+		color->b = get_color(line);
 	if (color->r < 0 || color->r > 255 || color->g < 0 || color->g > 255
 		|| color->b < 0 || color->b > 255)
-		return (cub_error("\nValues out of range\n", FAILURE));
+		return (-3);
 	return (SUCCESS);
 }
 

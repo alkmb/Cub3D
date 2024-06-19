@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 21:40:38 by akambou           #+#    #+#             */
-/*   Updated: 2024/06/17 21:15:27 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/17 13:54:25 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	display_ray(t_game *game)
 		game->line.x += game->line.xincrement;
 		game->line.y += game->line.yincrement;
 		mlx_pixel_put(game->data.mlx_ptr, \
-		game->data.win_ptr, round(game->line.x), round(game->line.y), 0x0000FF);
+		game->data.win_ptr, round(game->line.x), round(game->line.y), 0xFFFFFF);
 		game->line.k++;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gprada-t <gprada-t@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 09:18:04 by gprada-t          #+#    #+#             */
-/*   Updated: 2024/06/17 07:46:52 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/19 03:03:32 by gprada-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,84 +23,61 @@ int	textures_and_colors_get(t_game *game)
 	return (FALSE);
 }
 
+char	*get_path(char *str)
+{
+	char	*path;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	while (str[i] && ft_isspace(str[i]))
+		i++;
+	while (str[i + j] && !ft_isspace(str[i + j]))
+		j++;
+	path = malloc(j + 1);
+	if (!path)
+		return (NULL);
+	ft_strlcpy(path, str + i, j + 1);
+	return (path);
+}
+
 void	parse_texture_and_colors(t_game *game, char *line)
 {
-	int	length;
-	char *newline;
-	
+	char	*new_line;
+	int		i;
+
+	i = 0;
 	if (!line)
 		return ((void)cub_error("Error\nInvalid texture\n", FAILURE));
-	while (ft_isspace(*line) == TRUE)
-		line++;
-	if (ft_strncmp(line, "NO", 2) == SUCCESS)
-	{
-		newline = ft_strchr(line, '\n');
-		if (newline != NULL)
-			length = newline - (line + 3);
-		else
-			length = ft_strlen(line + 3);
-		game->map.north_texture = malloc(length + 1);
-		if (game->map.north_texture != NULL)
-		{
-			ft_strncpy(game->map.north_texture, line + 3, length);
-			game->map.north_texture[length] = '\0';
-		}
-	}
-	else if (ft_strncmp(line, "SO", 2) == SUCCESS)
-	{
-		newline = ft_strchr(line, '\n');
-		if (newline != NULL)
-			length = newline - (line + 3);
-		else
-			length = ft_strlen(line + 3);
-		game->map.south_texture = malloc(length + 1);
-		if (game->map.south_texture != NULL)
-		{
-			ft_strncpy(game->map.south_texture, line + 3, length);
-			game->map.south_texture[length] = '\0';
-		}
-	}
-	else if (ft_strncmp(line, "WE", 2) == SUCCESS)
-	{
-		newline = ft_strchr(line, '\n');
-		if (newline != NULL)
-			length = newline - (line + 3);
-		else
-			length = ft_strlen(line + 3);
-		game->map.west_texture = malloc(length + 1);
-		if (game->map.west_texture != NULL)
-		{
-			ft_strncpy(game->map.west_texture, line + 3, length);
-			game->map.west_texture[length] = '\0';
-		}
-	}
-	else if (ft_strncmp(line, "EA", 2) == SUCCESS)
-	{
-		newline = ft_strchr(line, '\n');
-		if (newline != NULL)
-			length = newline - (line + 3);
-		else
-			length = ft_strlen(line + 3);
-		game->map.east_texture = malloc(length + 1);
-		if (game->map.east_texture != NULL)
-		{
-			ft_strncpy(game->map.east_texture, line + 3, length);
-			game->map.east_texture[length] = '\0';
-		}
-	}
-	else if (ft_strncmp(line, "F", 1) == SUCCESS)
-		parse_color(game, line);
-	else if (ft_strncmp(line, "C", 1) == SUCCESS)
-		parse_color(game, line);
+	while (ft_isspace(line[i]) == TRUE)
+		i++;
+	new_line = ft_strdup(line + i);
+	if (ft_strncmp(new_line, "NO", 2) == 0)
+		game->map.north_texture = get_path(new_line + 2);
+	else if (ft_strncmp(new_line, "SO", 2) == 0)
+		game->map.south_texture = get_path(new_line + 2);
+	else if (ft_strncmp(new_line, "EA", 2) == 0)
+		game->map.east_texture = get_path(new_line + 2);
+	else if (ft_strncmp(new_line, "WE", 2) == 0)
+		game->map.west_texture = get_path(new_line + 2);
+	else if (ft_strncmp(new_line, "F", 1) == 0)
+		parse_color(game, new_line);
+	else if (ft_strncmp(new_line, "C", 1) == 0)
+		parse_color(game, new_line);
+	free(new_line);
 }
 
 int	parse_map(t_game *game, char *line)
 {
-	int			i;
-	static int	tab_count = 0;
-	static int	player = 0;
+	int	i;
+
 	i = 0;
-	while (line[i])
+	while (line[i] && (line[i] == ' ' || line[i] == '0'
+			|| line[i] == '1' || line[i] == '2'
+			|| line[i] == 'N' || line[i] == 'S'
+			|| line[i] == 'E' || line[i] == 'W'
+			|| line[i] == '7'))
 	{
 		if (line[i] == 'N' || line[i] == 'S'
 			|| line[i] == 'E' || line[i] == 'W')
@@ -108,15 +85,14 @@ int	parse_map(t_game *game, char *line)
 			game->player.x = i;
 			game->player.y = game->map.mapy;
 			game->player.angle = line[i];
-			player++;
-			if (player > 1)
-				return (free(game->map.temp_map), cub_error("Error\nInvalid map, \
-					cannot be more than 1 player\n", FAILURE));
+			game->map.player += 1;
+			if (game->map.player > 1)
+				return (cub_error("Error\n\
+				Only 1 player videogame sorry\n", FAILURE));
 		}
 		i++;
 	}
 	game->map.temp_map = ft_strjoin(game->map.temp_map, line);
-	printf ("line : %s\n", line);
 	return (SUCCESS);
 }
 
@@ -137,15 +113,11 @@ int	parse_file(t_game *game, char *argv)
 		parse_texture_and_colors(game, line);
 		line = get_next_line(fd);
 	}
-	game->map.floor.color = rgb_to_int(game->map.floor);
-	printf("floor color: %d\n", game->map.floor.color);
-	game->map.ceiling.color = rgb_to_int(game->map.ceiling);
-	printf("ceiling color: %d\n", game->map.ceiling.color);
 	while (line)
 	{
 		line = get_next_line(fd);
 		if (!line)
-			break;
+			break ;
 		parse_map(game, line);
 	}
 	close(fd);

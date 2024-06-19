@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 21:12:01 by akambou           #+#    #+#             */
-/*   Updated: 2024/06/18 03:35:39 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/19 07:07:56 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,8 +113,8 @@ void	draw_sprite(t_game *game)
 		angle_to_sprite += 2 * M_PI;
 	if (angle_to_sprite > M_PI)
 		angle_to_sprite -= 2 * M_PI;
-	float sprite_screen_x = (game->map.win_w / 2) + tan(angle_to_sprite) * (game->map.win_w / 2 + 64);
-	float sprite_screen_y = (game->map.win_h / 2) - (1 / distance) * game->map.win_h / 2 + 128;
+	float sprite_screen_x = (game->map.win_w / 2) + tan(angle_to_sprite) * (game->map.win_w / 2 + 10);
+	float sprite_screen_y = (game->map.win_h / 2) - (1 / distance) * game->map.win_h / 2 + 24;
 	if (!game->sprite.texture)
 	{
 		game->sprite.texture = mlx_xpm_file_to_image(game->data.mlx_ptr, \
@@ -129,7 +129,7 @@ void	draw_sprite(t_game *game)
 		{
 			game->data.color = get_texture_color2((int *)game->sprite.addr, x, y, game);
 			if (game->data.color != 0x0000FF && (distance < game->rays->v_length 
-			&& distance < game->rays->h_length && angle_to_sprite < M_PI_2 && angle_to_sprite > -M_PI_2))
+			&& distance < game->rays->h_length && angle_to_sprite < M_PI_2 / 2 && angle_to_sprite > -M_PI_2 / 2))
 				my_mlx_pixel_put(&game->data, sprite_screen_x - game->sprite.texture_width  + x, \
 				sprite_screen_y - game->sprite.texture_height + y, game->data.color);
 		}

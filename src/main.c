@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gprada-t <gprada-t@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 03:07:46 by kmb               #+#    #+#             */
-/*   Updated: 2024/06/17 06:48:01 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/18 18:07:52 by gprada-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ int	main(int argc, char **argv)
 		return (FAILURE);
 	}
 	if (parse_file(&game, argv[1]))
-		return (FAILURE);
+		return (FAILURE);//free
 	if (mapping(&game))
-		return (cub_error("Error\nInvalid map\n", FAILURE));
+		return (FAILURE);//free
 	init_game(&game);
 	mlx_hook(game.data.win_ptr, MotionNotify, \
 	PointerMotionMask, &mouse_move, &game);
@@ -39,4 +39,5 @@ int	main(int argc, char **argv)
 	mlx_mouse_hide(game.data.mlx_ptr, game.data.win_ptr);
 	mlx_loop_hook(game.data.mlx_ptr, loop, &game);
 	mlx_loop(game.data.mlx_ptr);
+	return (SUCCESS);
 }
