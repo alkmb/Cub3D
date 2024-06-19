@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 22:06:20 by akambou           #+#    #+#             */
-/*   Updated: 2024/06/17 14:08:53 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/19 09:24:11 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	get_texture_pos(t_game *game)
 
 void	select_wall(t_game *game)
 {
-	if (game->rays->win_i < game->map.win_h && \
+	if (game->map.map[game->rays->mp] != 7 && game->rays->win_i < game->map.win_h && \
 	game->rays->h_length < game->rays->v_length && game->rays->angle > M_PI)
 	{
 		get_texture_pos(game);
@@ -83,16 +83,16 @@ void	select_wall(t_game *game)
 		get_texture_pos(game);
 		game->data.color = get_texture_color((int *)game->data.s_addr, game);
 	}
-	else if (game->rays->win_i < game->map.win_h \
+	else if (game->map.map[game->rays->mp] != 7 && game->rays->win_i < game->map.win_h \
 	&& game->rays->angle > M_PI_2 && game->rays->angle < 3 * M_PI_2)
 	{
 		get_texture_pos(game);
-		game->data.color = get_texture_color((int *)game->data.e_addr, game);
+		game->data.color = get_texture_color((int *)game->data.w_addr, game);
 	}
-	else if (game->map.map[game->rays->mp] != 7)
+	else 
 	{
 		get_texture_pos(game);
-		game->data.color = get_texture_color((int *)game->data.w_addr, game);
+		game->data.color = get_texture_color((int *)game->data.e_addr, game);
 	}
 	check_door(game);
 }

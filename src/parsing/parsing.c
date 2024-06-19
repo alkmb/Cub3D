@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gprada-t <gprada-t@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/14 09:18:04 by gprada-t          #+#    #+#             */
-/*   Updated: 2024/06/19 03:03:32 by gprada-t         ###   ########.fr       */
+/*   Updated: 2024/06/19 09:08:45 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,26 @@ void	parse_texture_and_colors(t_game *game, char *line)
 	free(new_line);
 }
 
+void	chose_direction(t_game *game, char c)
+{
+	if (c == 'N')
+	{
+		game->player.angle = -1;
+	}
+	else if (c == 'S')
+	{
+		game->player.angle = M_PI - 1;
+	}
+	else if (c == 'E')
+	{
+		game->player.angle = M_PI_2 - 1;
+	}
+	else if (c == 'W')
+	{
+		game->player.angle = (3 * M_PI_2 - 1);
+	}
+}
+
 int	parse_map(t_game *game, char *line)
 {
 	int	i;
@@ -84,8 +104,8 @@ int	parse_map(t_game *game, char *line)
 		{
 			game->player.x = i;
 			game->player.y = game->map.mapy;
-			game->player.angle = line[i];
 			game->map.player += 1;
+			chose_direction(game, line[i]);
 			if (game->map.player > 1)
 				return (cub_error("Error\n\
 				Only 1 player videogame sorry\n", FAILURE));

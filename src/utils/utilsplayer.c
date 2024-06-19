@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 13:48:37 by akambou           #+#    #+#             */
-/*   Updated: 2024/06/17 13:49:35 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/19 08:26:11 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 int	shoot(int button, int x, int y, void *param)
 {
 	if (button == 1)
+	{
 		draw_shot(param);
+		return (1);
+	}
 	return (0);
 }
 
@@ -34,13 +37,16 @@ int	mouse_move(int x, int y, t_game *game)
 	float	sensitivity;
 
 	sensitivity = 0.0001;
-	game->player.angle += (x - game->map.win_w / 2) * sensitivity;
-	if (game->player.angle < 0)
-		game->player.angle += 2 * M_PI;
-	if (game->player.angle > 2 * M_PI)
-		game->player.angle -= 2 * M_PI;
-	game->player.delta_x = cos(game->player.angle) * 5;
-	game->player.delta_y = sin(game->player.angle) * 5;
+	if (game->focus == 1)
+	{
+		game->player.angle += (x - game->map.win_w / 2) * sensitivity;
+		if (game->player.angle < 0)
+			game->player.angle += 2 * M_PI;
+		if (game->player.angle > 2 * M_PI)
+			game->player.angle -= 2 * M_PI;
+		game->player.delta_x = cos(game->player.angle) * 5;
+		game->player.delta_y = sin(game->player.angle) * 5;
+	}
 	return (0);
 }
 

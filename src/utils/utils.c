@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 03:25:53 by akambou           #+#    #+#             */
-/*   Updated: 2024/06/19 06:32:26 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/19 09:18:34 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 void	check_door(t_game *game)
 {
-	if (game->map.map[game->rays->mp] == 7 && game->rays->win_i \
-	< game->map.win_h)
+	if (game->map.map[game->rays->mp] == 7)
 	{
 		get_texture_pos(game);
 		if (game->rays->total_length < 50)
@@ -44,9 +43,9 @@ int	cub_error(char *str, int error)
 
 int	close_window(t_game *game)
 {
+	mlx_destroy_window(game->data.mlx_ptr, game->data.win_ptr);
 	exit(0);
 }
-
 int	loop(t_game *game)
 {
 	cast_rays(game);
@@ -61,7 +60,13 @@ int	loop(t_game *game)
 	game->map.y = 0;
 	game->map.maps *= 8;
 	game->map.cellsize *= 8;
-	mlx_mouse_move(game->data.mlx_ptr, game->data.win_ptr, \
-	(game->map.win_w / 2), game->map.win_h / 2);
+	mlx_hook(game->data.win_ptr, 17, 0, close_window, game);
+	if (game->focus == 1)
+	{
+		mlx_mouse_move(game->data.mlx_ptr, game->data.win_ptr, \
+		(game->map.win_w / 2), game->map.win_h / 2);
+		mlx_mouse_hide(game->data.mlx_ptr, game->data.win_ptr);
+
+	}
 	return (0);
 }

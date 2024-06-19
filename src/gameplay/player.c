@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 22:01:52 by akambou           #+#    #+#             */
-/*   Updated: 2024/06/17 13:51:48 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/19 08:19:39 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,10 @@ void	player_angle(int keycode, t_game *game)
 			game->player.angle += (2 * M_PI);
 		game->player.delta_x = cos(game->player.angle) * 5;
 		game->player.delta_y = sin(game->player.angle) * 5;
+	}
+	else if (keycode == KEY_P)
+	{
+		game->focus = !game->focus;
 	}
 }
 

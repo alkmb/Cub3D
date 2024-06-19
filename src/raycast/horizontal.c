@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 22:52:13 by akambou           #+#    #+#             */
-/*   Updated: 2024/06/19 06:31:23 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/19 09:15:21 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ void	cast_horizontal(t_game *game)
 	{
 		set_horizontal(game);
 		if (game->rays->mp > 0 && game->rays->mp < game->map.width * \
-		game->map.height && (game->map.map[game->rays->mp] == 1 || \
-		(game->map.map[game->rays->mp] == 7)))
+		game->map.height && ((game->map.map[game->rays->mp] == 1)))
 		{
 			game->rays->horizontal_x = game->rays->ray_x;
 			game->rays->horizontal_y = game->rays->ray_y;

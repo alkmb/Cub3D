@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 22:42:26 by akambou           #+#    #+#             */
-/*   Updated: 2024/06/19 06:31:46 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/19 09:10:27 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	chose_lenght(t_game *game)
 	{
 		game->rays->total_length = game->rays->h_length;
 		draw_ray(game, 0, game->rays->total_length);
-
 	}
 	else if (game->rays->h_length > game->rays->v_length)
 	{
@@ -55,7 +54,6 @@ void	cast_rays(t_game *game)
 	game->rays->ray = 0;
 	while (game->rays->ray < 240)
 	{
-		
 		reset_angle(game);
 		reset_horizontal(game);
 		horizontal_direction(game);

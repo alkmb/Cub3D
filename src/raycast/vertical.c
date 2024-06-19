@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 22:44:22 by akambou           #+#    #+#             */
-/*   Updated: 2024/06/19 06:31:34 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/19 08:32:08 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	cast_vertical(t_game *game)
 		if (game->rays->mp >= 0 && game->rays->mp < \
 		(game->map.mapy * game->map.mapx - 1) \
 		&& (game->map.map[game->rays->mp] == 1 \
-		|| game->map.map[game->rays->mp] == 7 || game->map.map[game->rays->mp] == 8))
+		|| game->map.map[game->rays->mp] == 7))
 		{
 			game->rays->vertical_x = game->rays->ray_x;
 			game->rays->vertical_y = game->rays->ray_y;

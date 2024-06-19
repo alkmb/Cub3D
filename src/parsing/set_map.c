@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_map.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gprada-t <gprada-t@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/06 15:47:08 by gprada-t          #+#    #+#             */
-/*   Updated: 2024/06/19 03:11:32 by gprada-t         ###   ########.fr       */
+/*   Updated: 2024/06/19 07:18:24 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int	*str_to_int_array(char *map, int x, int y)
 				array[index++] = 2;
 		else if (map[i] == 'D')
 			array[index++] = 7;
+		else if (map[i] == 'O')
+			array[index++] = 8;
 		i++;
 	}
 	return (array);

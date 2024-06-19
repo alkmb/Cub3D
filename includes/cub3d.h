@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 23:00:41 by akambou           #+#    #+#             */
-/*   Updated: 2024/06/19 06:36:31 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/19 09:13:14 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define KEY_S 115
 # define KEY_D 100
 # define KEY_M 109
+# define KEY_P 112
 # define KEY_LEFT 65361
 # define KEY_RIGHT 65363
 # define KEY_ESC 65307
@@ -193,13 +194,18 @@ typedef struct s_line
 
 typedef struct s_sprite
 {
-	int type;
-	int x;
-	int y;
-	int z;
-	int *texture;
-	int *rotated_texture;
-	int visible;
+	float	sprite_x;
+	float	sprite_y;
+	float	sprite_screen_x;
+	float	sprite_screen_y;
+	float	distance;
+	float	angle_to_sprite;
+	float	relative_x;
+	float	relative_y;
+	int		x;
+	int		y;
+	int		active;
+	int		*texture;
 	char	*addr;
 	int		bits_per_pixel;
 	int		line_length;
@@ -208,7 +214,7 @@ typedef struct s_sprite
 	int		texture_height;
 	int		screen_x;
 	int		screen_y;
-} t_sprite;
+}	t_sprite;
 
 typedef struct s_game
 {
@@ -219,6 +225,7 @@ typedef struct s_game
 	t_data		texture;
 	t_line		line;
 	t_ray		rays[90];
+	int			focus;
 }	t_game;
 //-----------------------PARSING-----------------------------------------------
 int			parse_file(t_game *game, char *argv);
@@ -288,6 +295,8 @@ void		reset_horizontal(t_game *game);
 void		cast_vertical(t_game *game);
 void		vertical_direction(t_game *game);
 void		reset_vertical(t_game *game);
+void		set_horizontal(t_game *game);
+void		set_vertical(t_game *game);
 
 //-----------------------UTILS-------------------------------------------------
 

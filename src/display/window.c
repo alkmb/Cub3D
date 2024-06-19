@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 21:12:01 by akambou           #+#    #+#             */
-/*   Updated: 2024/06/19 07:07:56 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/19 08:04:46 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void	set_window(t_game *game)
 {
 	if (game == NULL || game->rays == NULL || game->rays->total_length == 0)
 		return ;
-	game->map.win_w = 960;
-	game->map.win_h = 640;
+	game->map.win_w = 1200;
+	game->map.win_h = 800;
 	game->rays->ray_width = game->map.win_w / 240;
 	game->rays->line_height = (game->map.maps * \
 	game->map.win_w) / game->rays->total_length * 0.7;
@@ -98,41 +98,82 @@ int tex_y, t_game *game)
 	return (texture[index]);
 }
 
-void	draw_sprite(t_game *game)
+void find_sprite(t_game *game)
 {
-	float sprite_x = 7 * 64;
-	float sprite_y = 6 * 64;
-	float relative_x = sprite_x - game->player.x;
-	float relative_y = sprite_y - game->player.y;
-	game->sprite.texture_width = 384;
-	game->sprite.texture_height = 384;
+	for (int i = 0; i < game->map.mapy; i++)
+	{
+		for (int j = 0; j < game->map.mapx; j++)
+		{
+			if (game->map.map[i * game->map.mapx + j] == 8)
+			{
+				game->sprite.sprite_x = j * 64;
+				game->sprite.sprite_y = i * 64;
+			}
+		}
+	}
+}
 
-	float distance = sqrt(relative_x * relative_x + relative_y * relative_y);
-	float angle_to_sprite = atan2(relative_y, relative_x) - game->player.angle;
-		if (angle_to_sprite < -M_PI)
-		angle_to_sprite += 2 * M_PI;
-	if (angle_to_sprite > M_PI)
-		angle_to_sprite -= 2 * M_PI;
-	float sprite_screen_x = (game->map.win_w / 2) + tan(angle_to_sprite) * (game->map.win_w / 2 + 10);
-	float sprite_screen_y = (game->map.win_h / 2) - (1 / distance) * game->map.win_h / 2 + 24;
+void calculate_sprite_position(t_game *game)
+{
+	game->sprite.relative_x = game->sprite.sprite_x - game->player.x;
+	game->sprite.relative_y = game->sprite.sprite_y - game->player.y;
+
+	game->sprite.distance = sqrt(game->sprite.relative_x * \
+	game->sprite.relative_x + game->sprite.relative_y * \
+	game->sprite.relative_y);
+	printf("distance: %f\n", game->sprite.distance);
+
+	game->sprite.angle_to_sprite = atan2(game->sprite.relative_y, \
+	game->sprite.relative_x) - game->player.angle;
+	if (game->sprite.angle_to_sprite < -M_PI)
+		game->sprite.angle_to_sprite += 2 * M_PI;
+	if (game->sprite.angle_to_sprite > M_PI)
+		game->sprite.angle_to_sprite -= 2 * M_PI;
+
+	game->sprite.sprite_screen_x = (game->map.win_w / 2) + \
+	tan(game->sprite.angle_to_sprite) * (game->map.win_w / 2 + 10);
+	game->sprite.sprite_screen_y = (game->map.win_h / 2) - \
+	(1 / game->sprite.distance) * game->map.win_h / 2 + 128;
+}
+
+void	get_sprite(t_game *game)
+{
 	if (!game->sprite.texture)
 	{
 		game->sprite.texture = mlx_xpm_file_to_image(game->data.mlx_ptr, \
-		"./textures/doom.xpm", &game->sprite.texture_width, &game->sprite.texture_height);
+		"./textures/doom.xpm", &game->sprite.texture_width, \
+		&game->sprite.texture_height);
 		game->sprite.addr = mlx_get_data_addr(game->sprite.texture, \
-		&game->sprite.bits_per_pixel, &game->sprite.line_length, &game->sprite.endian);
+		&game->sprite.bits_per_pixel, &game->sprite.line_length, \
+		&game->sprite.endian);
 	}
-	int x, y;
-	for (y = 0; y < game->sprite.texture_height; y++)
+}
+
+void draw_sprite(t_game *game)
+{
+	find_sprite(game);
+	calculate_sprite_position(game);
+	get_sprite(game);
+	game->sprite.y = 0;
+	while (game->sprite.y < game->sprite.texture_height)
 	{
-		for (x = 0; x < game->sprite.texture_width; x++)
+		game->sprite.x = 0;
+		while ( game->sprite.x < game->sprite.texture_width)
 		{
-			game->data.color = get_texture_color2((int *)game->sprite.addr, x, y, game);
-			if (game->data.color != 0x0000FF && (distance < game->rays->v_length 
-			&& distance < game->rays->h_length && angle_to_sprite < M_PI_2 / 2 && angle_to_sprite > -M_PI_2 / 2))
-				my_mlx_pixel_put(&game->data, sprite_screen_x - game->sprite.texture_width  + x, \
-				sprite_screen_y - game->sprite.texture_height + y, game->data.color);
+			game->data.color = get_texture_color2((int *)game->sprite.addr, \
+			game->sprite.x, game->sprite.y, game);
+			if (game->data.color != 0x0000FF && (game->sprite.distance < \
+			game->rays->v_length 
+			&& game->sprite.distance < game->rays->h_length && \
+			game->sprite.angle_to_sprite < M_PI_2 / 2 
+			&& game->sprite.angle_to_sprite > -M_PI_2 / 2))
+				my_mlx_pixel_put(&game->data, game->sprite.sprite_screen_x - \
+				game->sprite.texture_width + game->sprite.x, \
+				game->sprite.sprite_screen_y - game->sprite.texture_height + \
+				game->sprite.y, game->data.color);
+				game->sprite.x++;
 		}
+		game->sprite.y++;
 	}
 }
 
