@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 23:00:41 by akambou           #+#    #+#             */
-/*   Updated: 2024/06/19 09:13:14 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/21 06:14:12 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,8 @@ typedef struct s_map
 	char		*south_texture;
 	char		*west_texture;
 	char		*east_texture;
+	char		*floor_texture;
+	char		*ceiling_texture;
 	int			*map;
 	int			win_w;
 	int			win_h;
@@ -179,17 +181,17 @@ typedef struct s_data
 
 typedef struct s_line
 {
-	int		dx;
-	int		dy;
-	int		steps;
-	int		k;
-	float	xincrement;
-	float	yincrement;
-	float	x;
-	float	y;
-	t_ray	*ray;
-	int		end_x;
-	int		end_y;
+	int			dx;
+	int			dy;
+	int			steps;
+	int			k;
+	float		xincrement;
+	float		yincrement;
+	float		x;
+	float		y;
+	t_ray		*ray;
+	int			end_x;
+	int			end_y;
 }	t_line;
 
 typedef struct s_sprite
@@ -227,6 +229,31 @@ typedef struct s_game
 	t_ray		rays[90];
 	int			focus;
 }	t_game;
+
+//-------------------IS-CLOSED-MAP----------------------------------------------
+int			check_edges(int idx, t_game *game, int i, int j);
+int			validate_map(t_game *game);
+int			check_closed_map(t_game *game);
+
+//-----------------------CHECK--------------------------------------------------
+int			invalid_texture(t_game *game);
+int			textures_and_colors_get(t_game *game);
+int			is_north(t_game *game);
+int			is_west(t_game *game);
+
+//-------------------COLOR_TEXT_C+F---------------------------------------------
+int			rgb_to_int(t_color color);
+int			get_color(char *line);
+int			get_rgb(t_color *color, char *line);
+int			parse_color(t_game *game, char *line);
+
+//-----------------------FILL_MAP-----------------------------------------------
+void		setting_map_x_map_y(char *str_map, t_game *game);
+int			*str_to_int_array(char *map, int x, int y);
+void		handle_char(char c, int *array, int *index, int x);
+void		fill_tabs(int *array, int *index);
+void		fill_spaces(int *array, int *index, int x);
+
 //-----------------------PARSING-----------------------------------------------
 int			parse_file(t_game *game, char *argv);
 int			parse_color(t_game *game, char *line);
@@ -237,20 +264,17 @@ char		*get_path(char *str);
 
 //-----------------------ERROR-------------------------------------------------
 int			cub_error(char *str, int error);
-
-//-----------------------CHECK--------------------------------------------------
 int			textures_and_colors_get(t_game *game);
 int			mapping(t_game *game);
-int			invalid_texture(t_game *game);
 int			check_doors(t_game *game);
 
 //-----------------------INIT--------------------------------------------------
-void		init_game(t_game *game);
+int			init_game(t_game *game);
 void		init_map_size(t_game *game);
 void		init_map(t_game *game);
 void		init_window(t_game *game);
 void		init_parsing_data(t_game *game);
-void		init_textures(t_game *game);
+int			init_textures(t_game *game);
 void		init_hud(t_game *game);
 void		init_floor_ceiling_and_doors(t_game *game);
 int			loop(t_game *game);
@@ -265,6 +289,8 @@ void		draw_window(t_game *game);
 int			get_texture_color(int *texture, t_game *game);
 void		get_texture_pos(t_game *game);
 int			get_texture_color1(int *texture, int tex_x, \
+			int tex_y, t_game *game);
+int			get_texture_color2(int *texture, int tex_x, \
 			int tex_y, t_game *game);
 void		select_wall(t_game *game);
 void		texture_pos_cf(t_game *game);

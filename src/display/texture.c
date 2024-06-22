@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gprada-t <gprada-t@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 22:06:20 by akambou           #+#    #+#             */
-/*   Updated: 2024/06/19 09:24:11 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/19 17:07:19 by gprada-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,7 @@ void	get_texture_pos(t_game *game)
 
 void	select_wall(t_game *game)
 {
-	if (game->map.map[game->rays->mp] != 7 && game->rays->win_i < game->map.win_h && \
-	game->rays->h_length < game->rays->v_length && game->rays->angle > M_PI)
+	if (is_north(game))
 	{
 		get_texture_pos(game);
 		game->data.color = get_texture_color((int *)game->data.n_addr, game);
@@ -83,13 +82,12 @@ void	select_wall(t_game *game)
 		get_texture_pos(game);
 		game->data.color = get_texture_color((int *)game->data.s_addr, game);
 	}
-	else if (game->map.map[game->rays->mp] != 7 && game->rays->win_i < game->map.win_h \
-	&& game->rays->angle > M_PI_2 && game->rays->angle < 3 * M_PI_2)
+	else if (is_west(game))
 	{
 		get_texture_pos(game);
 		game->data.color = get_texture_color((int *)game->data.w_addr, game);
 	}
-	else 
+	else
 	{
 		get_texture_pos(game);
 		game->data.color = get_texture_color((int *)game->data.e_addr, game);

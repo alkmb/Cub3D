@@ -3,14 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gprada-t <gprada-t@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 03:57:05 by gprada-t          #+#    #+#             */
-/*   Updated: 2024/06/19 03:04:58 by gprada-t         ###   ########.fr       */
+/*   Updated: 2024/06/21 06:36:35 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
+
+int	textures_and_colors_get(t_game *game)
+{
+	if (game->map.north_texture && game->map.south_texture
+		&& game->map.east_texture && game->map.west_texture
+		&& game->map.floor.r != -1 && game->map.floor.g != -1
+		&& game->map.floor.b != -1 && game->map.ceiling.r != -1
+		&& game->map.ceiling.g != -1 && game->map.ceiling.b != -1)
+		return (TRUE);
+	return (FALSE);
+}
+
+int	is_north(t_game *game)
+{
+	return (game->map.map[game->rays->mp] != 7
+		&& game->rays->win_i < game->map.win_h
+		&& game->rays->h_length < game->rays->v_length
+		&& game->rays->angle > M_PI);
+}
+
+int	is_west(t_game *game)
+{
+	return (game->map.map[game->rays->mp] != 7
+		&& game->rays->win_i < game->map.win_h
+		&& game->rays->angle > M_PI_2
+		&& game->rays->angle < 3 * M_PI_2);
+}
 
 int	invalid_texture(t_game *game)
 {

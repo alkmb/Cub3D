@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 03:25:53 by akambou           #+#    #+#             */
-/*   Updated: 2024/06/19 09:18:34 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/21 05:35:53 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,11 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 
 int	cub_error(char *str, int error)
 {
+	int	err;
+
 	while (*str)
-		write (2, str++, 1);
-	return (error);
+		err = write (2, str++, 1);
+	return (error * err);
 }
 
 int	close_window(t_game *game)
@@ -46,6 +48,7 @@ int	close_window(t_game *game)
 	mlx_destroy_window(game->data.mlx_ptr, game->data.win_ptr);
 	exit(0);
 }
+
 int	loop(t_game *game)
 {
 	cast_rays(game);
@@ -66,7 +69,6 @@ int	loop(t_game *game)
 		mlx_mouse_move(game->data.mlx_ptr, game->data.win_ptr, \
 		(game->map.win_w / 2), game->map.win_h / 2);
 		mlx_mouse_hide(game->data.mlx_ptr, game->data.win_ptr);
-
 	}
 	return (0);
 }

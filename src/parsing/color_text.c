@@ -6,7 +6,7 @@
 /*   By: gprada-t <gprada-t@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 18:03:29 by gprada-t          #+#    #+#             */
-/*   Updated: 2024/06/18 19:15:04 by gprada-t         ###   ########.fr       */
+/*   Updated: 2024/06/21 10:01:02 by gprada-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ int	get_rgb(t_color *color, char *line)
 	if (color->r < 0 || color->r > 255 || color->g < 0 || color->g > 255
 		|| color->b < 0 || color->b > 255)
 		return (-3);
+	else
+		color->color = rgb_to_int(*color);
 	return (SUCCESS);
 }
 
