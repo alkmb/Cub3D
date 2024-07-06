@@ -48,7 +48,8 @@ void	draw_floor(t_game *game)
 		{
 			texture_pos_cf(game);
 			if (game->map.floor_texture)
-				game->data.color = get_texture_color1((int *)game->data.floor_addr, \
+				game->data.color = get_texture_color1((int *) \
+				game->data.floor_addr, \
 				game->data.texture_x / 2, game->data.texture_y / 4, game);
 			if (game->map.floor_texture)
 				my_mlx_pixel_put(&game->data, game->rays->ray * \

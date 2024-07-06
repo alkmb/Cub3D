@@ -91,6 +91,6 @@ void	select_wall(t_game *game)
 	{
 		get_texture_pos(game);
 		game->data.color = get_texture_color((int *)game->data.e_addr, game);
+		check_door(game);
 	}
-	check_door(game);
 }

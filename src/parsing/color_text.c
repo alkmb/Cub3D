@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color_text.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gprada-t <gprada-t@student.42barcelona.    +#+  +:+       +#+        */
+/*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 18:03:29 by gprada-t          #+#    #+#             */
-/*   Updated: 2024/06/21 10:01:02 by gprada-t         ###   ########.fr       */
+/*   Updated: 2024/07/02 04:22:05 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,19 @@ int	get_color(char *line)
 	return (i);
 }
 
-//int	path_or_color(t_game *game, char *line)
-//{
-//	while (ft_isspace(*line))
-//		line++;
-//	if (ft_isdigit(*line))
-//		return (set_path(game, line));
-//}
+int	is_color(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i] != '\0')
+	{
+		if (!ft_isdigit(line[i]) && line[i] != ',')
+			return (FAILURE);
+		i++;
+	}
+	return (SUCCESS);
+}
 
 int	get_rgb(t_color *color, char *line)
 {
@@ -53,8 +59,7 @@ int	get_rgb(t_color *color, char *line)
 	if (color->r < 0 || color->r > 255 || color->g < 0 || color->g > 255
 		|| color->b < 0 || color->b > 255)
 		return (-3);
-	else
-		color->color = rgb_to_int(*color);
+	color->color = rgb_to_int(*color);
 	return (SUCCESS);
 }
 
@@ -63,8 +68,8 @@ int	parse_color(t_game *game, char *line)
 	if (!line)
 		return (cub_error("Error\nInvalid color\n", FAILURE));
 	if (line[0] == 'F')
-		return (get_rgb(&game->map.floor, line + 1));
+		return (get_rgb(&game->map.floor, line + 2));
 	else if (line[0] == 'C')
-		return (get_rgb(&game->map.ceiling, line + 1));
+		return (get_rgb(&game->map.ceiling, line + 2));
 	return (SUCCESS);
 }

@@ -2,11 +2,10 @@ NO ./textures/brickbrown.xpm
 SO ./textures/brickred.xpm
 WE ./textures/brickblue.xpm
 EA ./textures/brickpurple.xpm
-CT ./textures/metal1.xpm
-FT ./textures/floor2.xpm
 
-F 80,80,80
-C 30,30,30
+C ./textures/metal1.xpm
+F ./textures/floor1.xpm
+
 
 111111111111111111111111111111111111111111111
 111111111111111111111111111111111111111111111

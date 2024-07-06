@@ -3,22 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gprada-t <gprada-t@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 03:57:05 by gprada-t          #+#    #+#             */
-/*   Updated: 2024/06/21 06:36:35 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/27 09:45:17 by gprada-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <cub3d.h>
 
+int	have_to_paint(t_map *map)
+{
+	if ((map->ceiling_texture
+			|| (map->ceiling.r != -1 && map->ceiling.g != -1
+				&& map->ceiling.b != -1)) && ((map->floor_texture
+				|| (map->floor.r != -1 && map->floor.g != -1
+					&& map->floor.b != -1))))
+		return (TRUE);
+	return (FALSE);
+}
+
 int	textures_and_colors_get(t_game *game)
 {
 	if (game->map.north_texture && game->map.south_texture
 		&& game->map.east_texture && game->map.west_texture
-		&& game->map.floor.r != -1 && game->map.floor.g != -1
-		&& game->map.floor.b != -1 && game->map.ceiling.r != -1
-		&& game->map.ceiling.g != -1 && game->map.ceiling.b != -1)
+		&& have_to_paint(&game->map))
 		return (TRUE);
 	return (FALSE);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gprada-t <gprada-t@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/15 03:25:53 by akambou           #+#    #+#             */
-/*   Updated: 2024/06/21 05:35:53 by akambou          ###   ########.fr       */
+/*   Updated: 2024/06/24 22:03:50 by gprada-t         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	cub_error(char *str, int error)
 
 	while (*str)
 		err = write (2, str++, 1);
-	return (error * err);
+	exit (error);
 }
 
 int	close_window(t_game *game)

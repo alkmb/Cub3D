@@ -6,7 +6,7 @@
 /*   By: akambou <akambou@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/14 23:00:41 by akambou           #+#    #+#             */
-/*   Updated: 2024/06/21 06:14:12 by akambou          ###   ########.fr       */
+/*   Updated: 2024/07/02 04:18:59 by akambou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,12 +240,16 @@ int			invalid_texture(t_game *game);
 int			textures_and_colors_get(t_game *game);
 int			is_north(t_game *game);
 int			is_west(t_game *game);
+int			have_to_paint(t_map *map);
 
 //-------------------COLOR_TEXT_C+F---------------------------------------------
 int			rgb_to_int(t_color color);
 int			get_color(char *line);
 int			get_rgb(t_color *color, char *line);
 int			parse_color(t_game *game, char *line);
+int			handle_floor_texture(t_game *game, char *new_line);
+int			handle_ceiling_texture(t_game *game, char *new_line);
+int			handle_texture_paths(t_game *game, char *new_line);
 
 //-----------------------FILL_MAP-----------------------------------------------
 void		setting_map_x_map_y(char *str_map, t_game *game);
@@ -257,9 +261,11 @@ void		fill_spaces(int *array, int *index, int x);
 //-----------------------PARSING-----------------------------------------------
 int			parse_file(t_game *game, char *argv);
 int			parse_color(t_game *game, char *line);
-void		parse_texture_and_colors(t_game *game, char *line);
+int			parse_texture_and_colors(t_game *game, char *line);
 int			parse_map(t_game *game, char *line);
 int			rgb_to_int(t_color color);
+int			get_line(t_game *game, char *line, char *temp, int fd);
+int			check_line(t_game *game, char *line, char *temp, int fd);
 char		*get_path(char *str);
 
 //-----------------------ERROR-------------------------------------------------
@@ -276,7 +282,7 @@ void		init_window(t_game *game);
 void		init_parsing_data(t_game *game);
 int			init_textures(t_game *game);
 void		init_hud(t_game *game);
-void		init_floor_ceiling_and_doors(t_game *game);
+int			init_floor_ceiling_and_doors(t_game *game);
 int			loop(t_game *game);
 
 //--------------------WINDOW--------------------------------------------------

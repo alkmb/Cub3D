@@ -26,7 +26,7 @@ void	cast_horizontal(t_game *game)
 	while (game->rays->deapht_of_field < 30)
 	{
 		set_horizontal(game);
-		if (game->rays->mp > 0 && game->rays->mp < game->map.width * \
+		if (game->rays->mp >= 0 && game->rays->mp < game->map.width * \
 		game->map.height && ((game->map.map[game->rays->mp] == 1)))
 		{
 			game->rays->horizontal_x = game->rays->ray_x;
@@ -53,7 +53,7 @@ void	horizontal_direction(t_game *game)
 	atan = -1 / tan(game->rays->angle);
 	if (game->rays->angle > M_PI)
 	{
-		game->rays->ray_y = (((int)game->player.y >> 6) << 6) - 0.0001;
+		game->rays->ray_y = (((int)game->player.y >> 6) << 6) - 1;
 		game->rays->ray_x = (game->player.y - game->rays->ray_y) * \
 		atan + game->player.x;
 		game->rays->y_offset = -64;
