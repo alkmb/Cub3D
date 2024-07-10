@@ -1,5 +1,4 @@
 
-```markdown
 # Cub3D
 
 ## Overview
@@ -37,7 +36,6 @@ Cub3D employs several key algorithms:
 To compile the project, use the provided `Makefile`:
 ```sh
 make
-```
 
 ### Usage
 
